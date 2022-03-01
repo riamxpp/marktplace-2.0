@@ -1,0 +1,38 @@
+/* 
+#3A71FA
+#3337DE
+#7145F5
+#7533DE
+#8C33DE
+*/
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #7145f5;
+  font-family: "Roboto", sans-serif;
+  color: #1a1919;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  align-items: stretch;
+}
+
+a {
+  text-decoration: none;
+  color: #1a1919;
+}

@@ -1,0 +1,12 @@
+.link {
+  text-decoration: none;
+  color: #1a1919;
+  padding: 0.5rem 0.5rem;
+  background-color: transparent;
+}
+@media (max-width: 550px) {
+  .link {
+    padding: 1rem 0.5rem;
+    width: 100%;
+  }
+}
