@@ -35,7 +35,6 @@ const ClienteLogin = ({
     event.preventDefault();
     LoginUsuario(email, senha);
   }
-
   useEffect(() => {
     if (data) {
       navigate("/");
@@ -56,6 +55,7 @@ const ClienteLogin = ({
           <Input
             placeholder="Email"
             type="email"
+            autoComplete="current-email"
             id="emailLoginCliente"
             name="emailLoginCliente"
             value={email}
@@ -66,6 +66,7 @@ const ClienteLogin = ({
         <SeguraInput>
           <Input
             placeholder="Senha"
+            autoComplete="current-password"
             type="password"
             id="senhaLoginCliente"
             name="senhaLoginCliente"

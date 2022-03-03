@@ -71,6 +71,7 @@ const FormCliente = ({ value }) => {
           width="80%"
           placeholder="Email"
           id="emailCliente"
+          autoComplete="new-email"
           name="emailCliente"
           value={email}
           onChange={({ target }) => setEmail(target.value)}
@@ -79,6 +80,7 @@ const FormCliente = ({ value }) => {
       <SeguraInput width="100%">
         <Input
           width="80%"
+          autoComplete="new-password"
           placeholder="Senha"
           id="senhaCliente"
           name="senhaCliente"

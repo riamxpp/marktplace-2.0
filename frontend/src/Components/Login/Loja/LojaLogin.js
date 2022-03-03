@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import ButtonEnviar from "../../Cadastro/ButtonEnviar";
 import Input from "../../Form/Input";
 import SeguraInput from "../../Geral/SeguraInput";
 import Titulo from "../../Geral/Titulo";
-import api from "../../api/api";
 import ErrorMessage from "../ErrorMessage";
+import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
+import { useNavigate } from "react-router-dom";
 
 const LojaForm = styled.form`
   width: 90%;
@@ -27,30 +28,31 @@ const LojaLogin = ({
   senha,
   setSenha,
 }) => {
-  const [dados, setDados] = useState(null);
+  const { loginLoja, dataLojaLogada } = useContext(LojaContext);
+  const navigate = useNavigate();
 
   async function sendLojaData(event) {
     event.preventDefault();
-
-    const data = await api
-      .post("/login-loja", {
-        email,
-        senha,
-      })
-      .then((response) => response)
-      .catch((error) => error);
-    setDados(data);
+    loginLoja(email, senha);
   }
+
+  useEffect(() => {
+    if (dataLojaLogada) {
+      console.log(dataLojaLogada);
+      navigate(`/${dataLojaLogada.nome}/perfil`);
+    }
+  }, [dataLojaLogada, navigate]);
 
   return (
     <>
       <LojaForm onSubmit={sendLojaData} value={ativaClienteOrLoja}>
         <Titulo>Loja</Titulo>
-        {dados && <ErrorMessage>{dados.data.error}</ErrorMessage>}
+        {dataLojaLogada && <ErrorMessage>{dataLojaLogada.error}</ErrorMessage>}
         <SeguraInput>
           <Input
             placeholder="Email"
             type="email"
+            autoComplete="current-email"
             id="emailLoginLoja"
             name="emailLoginLoja"
             value={email}
@@ -61,6 +63,7 @@ const LojaLogin = ({
           <Input
             placeholder="Senha"
             type="password"
+            autoComplete="current-password"
             id="senhaLoginLoja"
             name="senhaLoginLoja"
             value={senha}

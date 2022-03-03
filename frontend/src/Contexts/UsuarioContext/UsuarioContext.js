@@ -40,6 +40,7 @@ export const UsuarioStorage = ({ children }) => {
 
   async function verificaStatusLogin() {
     const dados = await api.get("/status-login-cliente");
+    console.log("f Usuario: ", dados.data);
   }
 
   return (

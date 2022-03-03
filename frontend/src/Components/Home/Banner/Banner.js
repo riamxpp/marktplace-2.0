@@ -6,10 +6,9 @@ const Banner = styled.section`
   background-image: url(${({ img }) => img});
   background-repeat: no-repeat;
   background-size: cover;
-  /* display: flex;
-  flex-direction: column;
+  display: flex;
   align-items: center;
-  justify-content: center; */
+  justify-content: center;
 `;
 
 export default Banner;

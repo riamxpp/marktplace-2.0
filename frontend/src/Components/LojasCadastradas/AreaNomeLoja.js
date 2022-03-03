@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const CadastroProduto = styled.section`
-  width: 100%;
+const AreaNomeLoja = styled.div`
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export default CadastroProduto;
+export default AreaNomeLoja;

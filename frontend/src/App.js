@@ -11,22 +11,28 @@ import Lojas from "./Components/LojasCadastradas/Lojas";
 import CadastrarProduto from "./Components/CadastrarProduto/CadastrarProduto";
 import "./Global.css";
 import Perfil from "./Components/Perfil/Perfil";
+import { LojaStorage } from "./Contexts/LojaContext/LojaContext";
 
 function App() {
   return (
     <UsuarioStorage>
-      {" "}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="home" element={<Home />} />
-        <Route path="cadastre-se" element={<Cadastro />} />
-        <Route path="login" element={<Login />} />
-        <Route path="todos-clientes" element={<TodosClientes />} />
-        <Route path="sobre" element={<Sobre />} />
-        <Route path="lojas" element={<Lojas />} />
-        <Route path=":loja/cadastrar-produto" element={<CadastrarProduto />} />
-        <Route path=":user/perfil" element={<Perfil />} />
-      </Routes>
+      <LojaStorage>
+        {" "}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="cadastre-se" element={<Cadastro />} />
+          <Route path="login" element={<Login />} />
+          <Route path="todos-clientes" element={<TodosClientes />} />
+          <Route path="sobre" element={<Sobre />} />
+          <Route path="lojas" element={<Lojas />} />
+          <Route
+            path=":loja/cadastrar-produto"
+            element={<CadastrarProduto />}
+          />
+          <Route path=":user/perfil" element={<Perfil />} />
+        </Routes>
+      </LojaStorage>
     </UsuarioStorage>
   );
 }

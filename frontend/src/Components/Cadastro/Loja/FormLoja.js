@@ -66,6 +66,7 @@ const FormLoja = ({ value }) => {
         <Input
           width="80%"
           placeholder="Email"
+          autoComplete="new-email"
           type="email"
           name="emailLoja"
           id="emailLoja"
@@ -77,6 +78,7 @@ const FormLoja = ({ value }) => {
         <Input
           width="80%"
           placeholder="Senha"
+          autoComplete="new-password"
           type="password"
           name="senhaLoja"
           id="senhaLoja"
