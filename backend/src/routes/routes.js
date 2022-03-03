@@ -1,5 +1,5 @@
-const express = require("express");
-const routes = express.Router();
+const { Router } = require("express");
+const routes = new Router();
 
 const HomeController = require("../controllers/HomeController");
 const LojaController = require("../controllers/LojaController");
@@ -18,11 +18,13 @@ routes.post("/cadastro-cliente", ClienteController.cadastrarCliente);
 routes.get("/todos-clientes", ClienteController.readAllCliente);
 
 routes.get("/meus-produtos", ProdutoController.verProdutos);
+routes.post("/cadastrar-produto", ProdutoController.cadastroProduto);
 
 routes.post("/login-cliente", LoginClienteController.loginCliente);
-routes.post("/logout-cliente", LoginClienteController.logoutCliente);
+// routes.post("/logout-cliente", LoginClienteController.logoutCliente);
 routes.get("/status-login-cliente", LoginClienteController.statusLoginCliente);
 
 routes.post("/login-loja", LoginLojaController.loginLoja);
+routes.get("/status-login-cliente", LoginLojaController.statusLoginLoja);
 
 module.exports = routes;

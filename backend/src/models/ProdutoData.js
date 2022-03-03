@@ -9,6 +9,7 @@ const ProdutoData = new mongoose.Schema({
     cor: String,
     required: false,
   },
+  categoria: String,
   marca: {
     marca: String,
     required: false,

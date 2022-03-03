@@ -8,21 +8,16 @@ const conexao = require("./config/dbConfig");
 conexao();
 const cors = require("cors");
 
-app.use(cors({ origin: "*" }));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-app.set("trust proxy", 1);
 app.use(
   session({
     secret: "diedwerlwrwekwe21",
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      httpOnly: false,
-    },
   })
 );
+app.use(cors({ origin: "*" }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use(routes);
 

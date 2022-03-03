@@ -1,4 +1,5 @@
 const Cliente = require("../models/ClienteData");
+const session = require("express-session");
 
 class LoginClienteController {
   async loginCliente(req, res) {
@@ -17,7 +18,8 @@ class LoginClienteController {
         cidade: usuarioDados.cidade,
       };
       req.session.dadosUsuario = dadosUsuario;
-      return res.json({ ...dadosUsuario, logado: true });
+      console.log(req.session);
+      return res.json({ dadosUsuario, logado: true });
     }
     return res.json({ error: "Usuario não encontrado" });
   }
@@ -30,6 +32,7 @@ class LoginClienteController {
   async statusLoginCliente(req, res) {
     const logado = req.session.usuarioLogado;
     const dados = req.session.dadosUsuario;
+    console.log("b statusLogin:, ", req.session);
     return res.json({ logado, dados });
   }
 }

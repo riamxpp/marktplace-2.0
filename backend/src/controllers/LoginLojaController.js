@@ -10,24 +10,28 @@ class LoginLojaController {
 
     if (data) {
       req.session.lojaLogado = true;
-      req.session.dadosLoja = {
+      let dadosLoja = {
+        idLoja: data._id,
         email: data.email,
-        loja: data.loja,
+        nome: data.nome,
         cidade: data.cidade,
         quantidadeProdutos: data.quantidadeProdutos,
         cnpj: data.cnpj,
+        produtos: data.produtos,
       };
+      req.session.dadosLoja = dadosLoja;
 
-      return res.json({
-        logado: true,
-        email: data.email,
-        loja: data.loja,
-        cidade: data.cidade,
-        quantidadeProdutos: data.quantidadeProdutos,
-        cnpj: data.cnpj,
-      });
+      return res.json(dadosLoja);
     }
     return res.json({ error: "Loja não encontrada" });
+  }
+
+  async statusLoginLoja(req, res) {
+    console.log(req.session);
+    return res.json({
+      logadoLogado: req.session.lojaLogado,
+      dadosLoja: req.session.dadosLoja,
+    });
   }
 }
 
