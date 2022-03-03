@@ -1,18 +1,28 @@
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { LojaContext } from "../../Contexts/LojaContext/LojaContext";
 import { UsuarioContext } from "../../Contexts/UsuarioContext/UsuarioContext";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import PerfilCliente from "./PerfilCliente/PerfilCliente";
+import PerfilLoja from "./PerfilLoja/PerfilLoja";
 
 const Perfil = () => {
-  const { verificaStatusLogin } = useContext(UsuarioContext);
+  const { data } = useContext(UsuarioContext);
+  const { dataLojaLogada } = useContext(LojaContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    verificaStatusLogin();
+    if (!data && !dataLojaLogada) {
+      navigate("/login");
+    }
   }, []);
 
   return (
     <>
       <Header />
-      Perfil
+      {data ? <PerfilCliente /> : <PerfilLoja />}
+      <Footer />
     </>
   );
 };
