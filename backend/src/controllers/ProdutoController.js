@@ -14,22 +14,32 @@ const quantidadeProdutos = async (req, res, id) => {
 };
 
 const cadastroProduto = async (req, res) => {
-  const { nome, preco, categoria, tamanho } = req.body;
-  console.log("produtoController: ", req.session.dadosLoja);
-  if (req.session.lojaLogado) {
-    const produto = await Produto.create({
-      idLoja: req.session.lojaLogado.idLoja,
-      emailLoja: req.session.lojaLogado.emailLoja,
-      nome,
-      preco,
-      marca,
-      categoria,
-      tamanho,
-    });
-    return res.json(produto);
-  }
+  const {
+    idLoja,
+    emailLoja,
+    nome,
+    preco,
+    categoria,
+    marca,
+    tamanho,
+    informacoesProduto,
+  } = req.body;
+  console.log(req.body);
+  // if (req.session.lojaLogado) {
+  const produto = await Produto.create({
+    idLoja,
+    emailLoja,
+    nome,
+    preco,
+    categoria,
+    marca,
+    informacoesProduto,
+    tamanho,
+  });
+  return res.json(produto);
+  // }
 
-  return res.json({ error: "Nenhuma loja logado" });
+  // return res.json({ error: "Nenhuma loja logado" });
 };
 
 const pegaProdutoCategoria = async (req, res) => {

@@ -5,10 +5,6 @@ const ProdutoData = new mongoose.Schema({
   emailLoja: String,
   nome: String,
   preco: Number,
-  cor: {
-    cor: String,
-    required: false,
-  },
   categoria: String,
   marca: {
     marca: String,

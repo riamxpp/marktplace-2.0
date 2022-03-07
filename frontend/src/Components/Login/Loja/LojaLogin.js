@@ -34,7 +34,6 @@ const LojaLogin = ({
   async function sendLojaData(event) {
     event.preventDefault();
     loginLoja(email, senha);
-    console.log("Envio");
   }
 
   useEffect(() => {

@@ -28,9 +28,31 @@ export const LojaStorage = ({ children }) => {
     setDataLojaLogada(dados.data);
   }
 
-  // async function cadastraProduto(nome, preco, categorio, tamanho) {
-  //   const dados = await api.post();
-  // }
+  async function cadastroProduto(
+    nome,
+    preco,
+    categoria,
+    marca,
+    tamanho,
+    informacoesProduto
+  ) {
+    if (dataLojaLogada) {
+      try {
+        await api.post("/cadastrar-produto", {
+          idLoja: dataLojaLogada.idLoja,
+          emailLoja: dataLojaLogada.email,
+          nome: nome,
+          preco: preco,
+          categoria: categoria,
+          marca: marca,
+          informacoesProduto: informacoesProduto,
+          tamanho: tamanho,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 
   async function verificaStatusLoginLoja() {
     const dados = await api.get("/status-login-cliente");
@@ -63,6 +85,7 @@ export const LojaStorage = ({ children }) => {
         verificaStatusLoginLoja,
         pegaProdutosCategoria,
         dadosProduto,
+        cadastroProduto,
       }}
     >
       {children}
