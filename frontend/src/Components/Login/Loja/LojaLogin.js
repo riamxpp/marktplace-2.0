@@ -34,11 +34,11 @@ const LojaLogin = ({
   async function sendLojaData(event) {
     event.preventDefault();
     loginLoja(email, senha);
+    console.log("Envio");
   }
 
   useEffect(() => {
     if (dataLojaLogada) {
-      console.log(dataLojaLogada);
       navigate(`/${dataLojaLogada.nome}/perfil`);
     }
   }, [dataLojaLogada, navigate]);

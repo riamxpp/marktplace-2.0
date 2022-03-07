@@ -1,33 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Header from "../Header/Header";
-import Banner from "./Banner/Banner";
-import BackgroundBanner from "../../assents/img/home/background.jpg";
-import Titutlo from "./Banner/Titulo";
-import ComoTrabalhamos from "./ComoTrabalhamos/ComoTrabalhamos";
-import Trabalho from "./ComoTrabalhamos/Trabalho";
 
-import HomeContent from "./HomeContent";
-import Servicos from "./Servicos/Servicos";
-import DepoimentosComponent from "./Depoimentos/Depoimentos";
 import Footer from "../Footer/Footer";
+import { UsuarioContext } from "../../Contexts/UsuarioContext/UsuarioContext";
+import HomeLogado from "./HomeLogado/HomeLogado";
+import HomeDeslogado from "./HomeDeslogado/HomeDeslogado";
 
 const Home = () => {
+  const { data } = useContext(UsuarioContext);
+
   return (
     <>
       <Header />
-      <HomeContent>
-        <Banner img={BackgroundBanner}>
-          <Titutlo>Sua loja a um clique de distância</Titutlo>
-        </Banner>
-        <ComoTrabalhamos>
-          <Trabalho></Trabalho>
-          <Trabalho></Trabalho>
-          <Trabalho></Trabalho>
-        </ComoTrabalhamos>
-      </HomeContent>
-      <Servicos></Servicos>
-      <DepoimentosComponent />
+      {data ? <HomeDeslogado /> : <HomeLogado />}
       <Footer />
     </>
   );

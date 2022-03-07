@@ -24,6 +24,7 @@ const CadastrarProduto = () => {
   const [corProduto, setCorProduto] = useState();
 
   const { verificaStatusLogin } = useContext(LojaContext);
+
   console.log(verificaStatusLogin);
   function arquivoSelecionado(event) {
     console.log(event.target.files[0]);

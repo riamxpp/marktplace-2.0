@@ -3,9 +3,9 @@ import styled from "styled-components";
 import ContentDepoimentos from "./ContentDepoimentos";
 import Depoimento from "./Depoimento";
 
-import pessoa1 from "../../../assents/img/home/person-1.jpg";
-import pessoa2 from "../../../assents/img/home/person-2.jpg";
-import pessoa3 from "../../../assents/img/home/person-3.jpg";
+import pessoa1 from "../../../../assents/img/home/person-1.jpg";
+import pessoa2 from "../../../../assents/img/home/person-2.jpg";
+import pessoa3 from "../../../../assents/img/home/person-3.jpg";
 import Paragrafo from "./Paragrafo";
 import Pessoa from "./Pessoa";
 import TituloDepoimentos from "./TituloDepoimentos";

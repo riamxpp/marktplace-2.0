@@ -8,6 +8,7 @@ export const LojaStorage = ({ children }) => {
   const [dataLojaLogada, setDataLojaLogada] = useState(null);
   const [loadingLoja, setLoadingLoja] = useState(null);
   const [errorLoja, setErrorLoja] = useState(false);
+  const [dadosProduto, setDadosProduto] = useState(null);
 
   async function pegaDadosLoja() {
     try {
@@ -27,15 +28,29 @@ export const LojaStorage = ({ children }) => {
     setDataLojaLogada(dados.data);
   }
 
-  async function cadastraProduto(nome, preco, categorio, tamanho) {
-    const dados = await api.post();
-  }
+  // async function cadastraProduto(nome, preco, categorio, tamanho) {
+  //   const dados = await api.post();
+  // }
 
   async function verificaStatusLoginLoja() {
     const dados = await api.get("/status-login-cliente");
     console.log("lojas: ", dados.data);
   }
 
+  async function pegaProdutosCategoria(categoria) {
+    try {
+      setLoadingLoja(true);
+      const dados = await api.post("/pega-produto-categoria", {
+        categoria: categoria,
+      });
+      setDadosProduto(dados);
+    } catch (err) {
+      setDadosProduto(null);
+      setErrorLoja(true);
+    } finally {
+      setLoadingLoja(false);
+    }
+  }
   return (
     <LojaContext.Provider
       value={{
@@ -46,6 +61,8 @@ export const LojaStorage = ({ children }) => {
         pegaDadosLoja,
         loginLoja,
         verificaStatusLoginLoja,
+        pegaProdutosCategoria,
+        dadosProduto,
       }}
     >
       {children}

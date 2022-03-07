@@ -14,6 +14,7 @@ const ProdutoData = new mongoose.Schema({
     marca: String,
     required: false,
   },
+  informacoesProduto: String,
   tamanho: {
     tamanho: String,
     required: false,

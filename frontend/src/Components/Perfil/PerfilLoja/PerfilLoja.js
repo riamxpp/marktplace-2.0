@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import ContentPerfilLoja from "./ContentPerfilLoja";
 import SuaContaTitulo from "../SuaContaTitulo";
@@ -6,14 +6,23 @@ import ContentOptions from "../ContentOptions";
 import Option from "../Option";
 import "react-bootstrap-icons";
 import SvgContent from "../SvgContent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TextoOption from "../TextoOption";
 import "../Perfil.css";
 import TituloOption from "../TituloOption";
 import Span from "../Span";
+import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
 
 const PerfilLoja = () => {
-  console.log();
+  const { dataLojaLogada } = useContext(LojaContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!dataLojaLogada) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <ContentPerfilLoja>
       <SuaContaTitulo>Sua conta</SuaContaTitulo>
@@ -100,6 +109,30 @@ const PerfilLoja = () => {
             <TextoOption>
               <TituloOption>Remover produto</TituloOption>
               <Span>Quer tirar algum produto do ar ? ok!</Span>
+            </TextoOption>
+          </Link>
+        </Option>
+        <Option>
+          <Link
+            className="linkPerfil"
+            to={`/${dataLojaLogada.nome}/perfil/cadastrar-produto`}
+          >
+            <SvgContent>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                fill="currentColor"
+                className="bi bi-file-earmark-plus"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" />
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+              </svg>
+            </SvgContent>
+            <TextoOption>
+              <TituloOption>Cadastrar Produto</TituloOption>
+              <Span>Entre para cadastrar um novo produto.</Span>
             </TextoOption>
           </Link>
         </Option>

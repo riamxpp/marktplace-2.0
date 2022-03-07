@@ -7,7 +7,7 @@ const FooterTag = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: #e7e7e7;
 `;
 
 export default FooterTag;

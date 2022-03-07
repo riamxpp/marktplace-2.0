@@ -27,7 +27,7 @@ function App() {
           <Route path="sobre" element={<Sobre />} />
           <Route path="lojas" element={<Lojas />} />
           <Route
-            path=":loja/cadastrar-produto"
+            path="/:loja/perfil/cadastrar-produto"
             element={<CadastrarProduto />}
           />
           <Route path=":user/perfil" element={<Perfil />} />

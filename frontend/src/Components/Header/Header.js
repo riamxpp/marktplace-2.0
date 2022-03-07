@@ -27,7 +27,7 @@ const Header = () => {
       });
     } else if (dataLojaLogada) {
       setNavPerfilLogin({
-        url: `/${navPerfilLogin.nome}/perfi`,
+        url: `/${dataLojaLogada.nome}/perfi`,
         viewUser: `${dataLojaLogada.nome}`,
       });
     } else {
@@ -75,10 +75,10 @@ const Header = () => {
             <Link
               id="linkMobileButton"
               className="link"
-              onClick={data ? Logout : () => "a"}
-              to={data ? "/home" : "/cadastre-se"}
+              onClick={data ? Logout : () => ""}
+              to={navPerfilLogin.url}
             >
-              {data ? "Sair" : "Cadastre-se"}
+              {data || dataLojaLogada ? "Sair" : "Cadastre-se"}
             </Link>
           </Li>
         </Ul>

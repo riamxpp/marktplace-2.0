@@ -3,7 +3,7 @@ const Loja = require("../models/LojaData");
 
 const verProdutos = async (req, res) => {
   const allProducts = await Produto.find();
-
+  console.log(allProducts);
   return res.json(allProducts);
 };
 
@@ -22,6 +22,7 @@ const cadastroProduto = async (req, res) => {
       emailLoja: req.session.lojaLogado.emailLoja,
       nome,
       preco,
+      marca,
       categoria,
       tamanho,
     });
@@ -31,4 +32,18 @@ const cadastroProduto = async (req, res) => {
   return res.json({ error: "Nenhuma loja logado" });
 };
 
-module.exports = { verProdutos, cadastroProduto };
+const pegaProdutoCategoria = async (req, res) => {
+  const categoria = req.body.categoria;
+  const dados = await Produto.find({ categoria: categoria });
+  if (!dados) {
+    return res.status({ error: "Algo deu errado" });
+  }
+
+  return res.json(dados);
+};
+
+module.exports = {
+  verProdutos,
+  cadastroProduto,
+  pegaProdutoCategoria,
+};

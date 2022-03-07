@@ -17,8 +17,9 @@ routes.delete("/loja/:id", LojaController.deleteLoja);
 routes.post("/cadastro-cliente", ClienteController.cadastrarCliente);
 routes.get("/todos-clientes", ClienteController.readAllCliente);
 
-routes.get("/meus-produtos", ProdutoController.verProdutos);
+routes.get("/pega-produtos", ProdutoController.verProdutos);
 routes.post("/cadastrar-produto", ProdutoController.cadastroProduto);
+routes.post("/pega-produto-categoria", ProdutoController.pegaProdutoCategoria);
 
 routes.post("/login-cliente", LoginClienteController.loginCliente);
 // routes.post("/logout-cliente", LoginClienteController.logoutCliente);
