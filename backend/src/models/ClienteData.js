@@ -7,6 +7,7 @@ const ClienteData = new mongoose.Schema({
   cpf: String,
   cidade: String,
   compras: Array,
+  carrinho: Array,
 });
 
 module.exports = mongoose.model("Usuário", ClienteData);

@@ -1,6 +1,31 @@
 const Loja = require("../models/LojaData");
 const Produto = require("../models/ProdutoData");
 
+const loginLoja = async (req, res) => {
+  const { email, senha } = req.body;
+  const data = await Loja.findOne({
+    email,
+    senha,
+  });
+
+  if (data) {
+    req.session.lojaLogado = true;
+    let dadosLoja = {
+      idLoja: data._id,
+      email: data.email,
+      nome: data.nome,
+      cidade: data.cidade,
+      quantidadeProdutos: data.quantidadeProdutos,
+      cnpj: data.cnpj,
+      produtos: data.produtos,
+    };
+    req.session.dadosLoja = dadosLoja;
+
+    return res.json(dadosLoja);
+  }
+  return res.json({ error: "Loja não encontrada" });
+};
+
 const takeEmail = async (email) => {
   const emailParaCadastrar = await Loja.findOne({ email: email });
   if (!emailParaCadastrar) return true;
@@ -62,4 +87,4 @@ const deleteLoja = async (req, res) => {
 
 const CadastrarProduto = (req, res) => {};
 
-module.exports = { readAll, createLoja, deleteLoja };
+module.exports = { loginLoja, readAll, createLoja, deleteLoja };
