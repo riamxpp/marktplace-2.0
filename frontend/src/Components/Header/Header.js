@@ -15,24 +15,28 @@ const Header = () => {
   const { data, Logout } = useContext(UsuarioContext);
   const { dataLojaLogada } = useContext(LojaContext);
   const [navPerfilLogin, setNavPerfilLogin] = useState({
-    url: "",
+    urlLogin: "",
+    urlCadastro: "",
     viewUser: "",
   });
 
   useEffect(() => {
     if (data) {
       setNavPerfilLogin({
-        url: `/${data.dadosUsuario.nome}/perfil`,
+        urlLogin: `/${data.dadosUsuario.nome}/perfil`,
+        urlCadastro: `/sair`,
         viewUser: `${data.dadosUsuario.nome}`,
       });
     } else if (dataLojaLogada) {
       setNavPerfilLogin({
-        url: `/${dataLojaLogada.nome}/perfi`,
+        urlLogin: `/${dataLojaLogada.nome}/perfi`,
+        urlCadastro: `/sair`,
         viewUser: `${dataLojaLogada.nome}`,
       });
     } else {
       setNavPerfilLogin({
-        url: `/login`,
+        urlLogin: `/login`,
+        urlCadastro: `/cadastre-se`,
         viewUser: `Login`,
       });
     }
@@ -50,7 +54,11 @@ const Header = () => {
             setActiveMobilleButon={setActiveMobilleButon}
             ulRef={ulRef}
           ></MobileButtonComponent>
-
+          {data && (
+            <Li>
+              <Link to="/carrinho">Carrinho</Link>
+            </Li>
+          )}
           <Li display={activeMobilleButton}>
             <Link id="linkMobileButton" className="link" to="/sobre">
               Sobre
@@ -66,7 +74,7 @@ const Header = () => {
             <Link
               id="linkMobileButton"
               className="link"
-              to={navPerfilLogin.url}
+              to={navPerfilLogin.urlLogin}
             >
               {navPerfilLogin.viewUser}
             </Link>
@@ -76,7 +84,7 @@ const Header = () => {
               id="linkMobileButton"
               className="link"
               onClick={data ? Logout : () => ""}
-              to={navPerfilLogin.url}
+              to={navPerfilLogin.urlCadastro}
             >
               {data || dataLojaLogada ? "Sair" : "Cadastre-se"}
             </Link>

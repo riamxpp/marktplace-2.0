@@ -2,12 +2,17 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
 import Produto from "../Produto";
-import AdicionarAoCarrinho from "./AdicionarAoCarrinho";
+import AdicionarAoCarrinhoHome from "./AdicionarAoCarrinhoHome";
 import Carrinho from "./Carrinho";
+import ContentPrecoEComprar from "./ContentPrecoEComprar";
 import InformacoesProduto from "./InformacoesProduto";
 import PrecoRoupa from "./PrecoRoupa";
 import SpanAdicionarAoCarrinho from "./SpanAdicionarAoCarrinho";
 import TituloProduto from "./TituloProduto";
+import { Link, useNavigate } from "react-router-dom";
+import "./Link.css";
+import { UsuarioContext } from "../../../Contexts/UsuarioContext/UsuarioContext";
+import Main from "../../Main/Main";
 
 const DivProduto = styled.div`
   width: 52rem;
@@ -27,13 +32,16 @@ const DivProduto = styled.div`
 `;
 
 const ContainerProduto = ({ produtoSelecionado }) => {
+  const { data, adicionarAoCarrinho } = useContext(UsuarioContext);
   const { pegaProdutosCategoria, dadosProduto, loading } =
     useContext(LojaContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!data) navigate("/login");
     pegaProdutosCategoria(produtoSelecionado);
-    console.log(dadosProduto);
-  }, [produtoSelecionado]);
+    console.log(data);
+  }, [produtoSelecionado, data, navigate]);
 
   if (loading) return <div>Loading...</div>;
   return (
@@ -46,14 +54,31 @@ const ContainerProduto = ({ produtoSelecionado }) => {
               {item.nome} {item.marca}
             </TituloProduto>
             <InformacoesProduto>{item.informacoesProduto}</InformacoesProduto>
+            <InformacoesProduto>{item.tamanho}</InformacoesProduto>
           </div>
-          <PrecoRoupa>{item.preco} R$</PrecoRoupa>
-          <AdicionarAoCarrinho>
+          <ContentPrecoEComprar>
+            <PrecoRoupa>{item.preco} R$</PrecoRoupa>
+            <Link to="/comprar" className="comprar">
+              Comprar
+            </Link>
+          </ContentPrecoEComprar>
+          <AdicionarAoCarrinhoHome
+            onClick={() =>
+              adicionarAoCarrinho(
+                data.dadosUsuario.idUser,
+                item._id,
+                item.nome,
+                item.categoria,
+                item.preco,
+                item.marca
+              )
+            }
+          >
             <SpanAdicionarAoCarrinho>
               Adicionar ao carrinho
             </SpanAdicionarAoCarrinho>
             <Carrinho />
-          </AdicionarAoCarrinho>
+          </AdicionarAoCarrinhoHome>
         </Produto>
       ))}
     </DivProduto>

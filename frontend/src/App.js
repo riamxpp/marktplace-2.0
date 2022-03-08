@@ -12,6 +12,7 @@ import CadastrarProduto from "./Components/CadastrarProduto/CadastrarProduto";
 import "./Global.css";
 import Perfil from "./Components/Perfil/Perfil";
 import { LojaStorage } from "./Contexts/LojaContext/LojaContext";
+import AdicionarAoCarrinho from "./Components/Carrinho/AdicionarAoCarrinho/AdicionarAoCarrinho";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             element={<CadastrarProduto />}
           />
           <Route path=":user/perfil" element={<Perfil />} />
+          <Route path="/carrinho" element={<AdicionarAoCarrinho />} />
         </Routes>
       </LojaStorage>
     </UsuarioStorage>

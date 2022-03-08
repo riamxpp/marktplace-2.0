@@ -1,0 +1,12 @@
+.comprar {
+  color: #7145f5;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.comprar:hover {
+  transition: 0.3s;
+  background-color: #e7e7e7;
+}

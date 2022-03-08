@@ -8,6 +8,7 @@ export const UsuarioStorage = ({ children }) => {
   const [login, setLogin] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [carrinhoUser, setCarrinhoUser] = useState(null);
 
   async function LoginUsuario(email, senha) {
     try {
@@ -43,6 +44,30 @@ export const UsuarioStorage = ({ children }) => {
     console.log("f Usuario: ", dados.data);
   }
 
+  async function adicionarAoCarrinho(
+    idUser,
+    idProduto,
+    nome,
+    categoria,
+    preco,
+    marca
+  ) {
+    await api.put("/adicionar-ao-carrinho", {
+      _id: idUser,
+      idProduto,
+      nome,
+      categoria,
+      preco,
+      marca,
+    });
+  }
+
+  async function pegaPorudotosCarrinho(_id) {
+    const dados = await api.post("/pega-carrinho-cliente", { _id });
+    console.log(dados.data.carrinho);
+    setCarrinhoUser(dados.data.carrinho);
+  }
+
   return (
     <UsuarioContext.Provider
       value={{
@@ -50,9 +75,12 @@ export const UsuarioStorage = ({ children }) => {
         login,
         error,
         loading,
+        carrinhoUser,
         LoginUsuario,
         Logout,
         verificaStatusLogin,
+        adicionarAoCarrinho,
+        pegaPorudotosCarrinho,
       }}
     >
       {children}
