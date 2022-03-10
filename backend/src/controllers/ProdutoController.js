@@ -1,18 +1,6 @@
 const Produto = require("../models/ProdutoData");
 const Loja = require("../models/LojaData");
 
-const verProdutos = async (req, res) => {
-  const allProducts = await Produto.find();
-  console.log(allProducts);
-  return res.json(allProducts);
-};
-
-const quantidadeProdutos = async (req, res, id) => {
-  const produtos = await Produto.findById(id);
-
-  return res.json(produtos);
-};
-
 const cadastroProduto = async (req, res) => {
   const {
     idLoja,
@@ -35,11 +23,24 @@ const cadastroProduto = async (req, res) => {
     marca,
     informacoesProduto,
     tamanho,
+    estoque,
   });
   return res.json(produto);
   // }
 
   // return res.json({ error: "Nenhuma loja logado" });
+};
+
+const verProdutos = async (req, res) => {
+  const allProducts = await Produto.find();
+  console.log(allProducts);
+  return res.json(allProducts);
+};
+
+const quantidadeProdutos = async (req, res, id) => {
+  const produtos = await Produto.findById(id);
+
+  return res.json(produtos);
 };
 
 const pegaProdutoCategoria = async (req, res) => {

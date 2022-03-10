@@ -15,6 +15,7 @@ const ProdutoData = new mongoose.Schema({
     tamanho: String,
     required: false,
   },
+  estoque: Number,
 });
 
 module.exports = mongoose.model("Produto", ProdutoData);

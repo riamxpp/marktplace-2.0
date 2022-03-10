@@ -68,7 +68,16 @@ const retornaUmUsuario = async (_id) => {
 };
 
 const AdicionarAoCarrinho = async (req, res) => {
-  const { _id, idProduto, nome, categoria, preco, marca } = req.body;
+  const {
+    _id,
+    idProduto,
+    nome,
+    categoria,
+    preco,
+    marca,
+    informacoesProduto,
+    estoque,
+  } = req.body;
   const dadosPrev = await retornaUmUsuario(_id);
   const dados = await Cliente.updateOne(
     { _id },
@@ -76,7 +85,15 @@ const AdicionarAoCarrinho = async (req, res) => {
       $set: {
         carrinho: [
           ...dadosPrev.carrinho,
-          { idProduto, nome, categoria, preco, marca },
+          {
+            idProduto,
+            nome,
+            categoria,
+            preco,
+            marca,
+            informacoesProduto,
+            estoque,
+          },
         ],
       },
     }
@@ -92,6 +109,27 @@ const pegaProdutosCarrinho = async (req, res) => {
   return res.status(400).json({ error: "Algo deu errado" });
 };
 
+const somaTotalCarrinho = async (req, res) => {
+  const { _id } = req.body;
+  const dadosPrev = await retornaUmUsuario(_id);
+  let total = 0;
+  dadosPrev.carrinho.map((item) => (total += item.preco));
+  return res.json(total);
+};
+
+const removeItemCarrinho = async (req, res) => {
+  const { carrinhoProduto, _id } = req.body;
+
+  await Cliente.updateOne(
+    { _id },
+    {
+      $set: {
+        carrinho: [...carrinhoProduto],
+      },
+    }
+  );
+};
+
 module.exports = {
   loginCliente,
   readOneCliente,
@@ -100,4 +138,6 @@ module.exports = {
   AdicionarAoCarrinho,
   retornaUmUsuario,
   pegaProdutosCarrinho,
+  somaTotalCarrinho,
+  removeItemCarrinho,
 };
