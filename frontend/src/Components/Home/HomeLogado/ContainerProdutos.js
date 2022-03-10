@@ -12,13 +12,11 @@ import TituloProduto from "./TituloProduto";
 import { Link, useNavigate } from "react-router-dom";
 import "./Link.css";
 import { UsuarioContext } from "../../../Contexts/UsuarioContext/UsuarioContext";
-import Main from "../../Main/Main";
 
 const DivProduto = styled.div`
   width: 52rem;
   height: auto;
   padding: 1rem;
-  /* background: #333; */
   display: flex;
   flex-wrap: wrap;
   gap: 1.8rem;
@@ -40,8 +38,9 @@ const ContainerProduto = ({ produtoSelecionado }) => {
   useEffect(() => {
     if (!data) navigate("/login");
     pegaProdutosCategoria(produtoSelecionado);
-    console.log(data);
   }, [produtoSelecionado, data, navigate]);
+
+  console.log(dadosProduto);
 
   if (loading) return <div>Loading...</div>;
   return (
@@ -70,7 +69,9 @@ const ContainerProduto = ({ produtoSelecionado }) => {
                 item.nome,
                 item.categoria,
                 item.preco,
-                item.marca
+                item.marca,
+                item.informacoesProduto,
+                item.estoque
               )
             }
           >

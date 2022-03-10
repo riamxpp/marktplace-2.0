@@ -9,6 +9,7 @@ export const UsuarioStorage = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [carrinhoUser, setCarrinhoUser] = useState(null);
+  const [totalCarrinho, setTotalCarrinho] = useState(null);
 
   async function LoginUsuario(email, senha) {
     try {
@@ -50,7 +51,9 @@ export const UsuarioStorage = ({ children }) => {
     nome,
     categoria,
     preco,
-    marca
+    marca,
+    informacoesProduto,
+    estoque
   ) {
     await api.put("/adicionar-ao-carrinho", {
       _id: idUser,
@@ -59,13 +62,28 @@ export const UsuarioStorage = ({ children }) => {
       categoria,
       preco,
       marca,
+      informacoesProduto,
+      estoque,
     });
   }
 
-  async function pegaPorudotosCarrinho(_id) {
+  async function pegaProdutosCarrinho(_id) {
     const dados = await api.post("/pega-carrinho-cliente", { _id });
-    console.log(dados.data.carrinho);
     setCarrinhoUser(dados.data.carrinho);
+    return carrinhoUser;
+  }
+
+  async function pegaTotalCarrinho(_id) {
+    const dados = await api.post("/total-carrinho", { _id });
+    setTotalCarrinho(dados.data);
+    return totalCarrinho;
+  }
+
+  async function removeItemCarrinho(carrinho, _id) {
+    await api.post("/remove-do-carrinho", {
+      carrinhoProduto: carrinho,
+      _id,
+    });
   }
 
   return (
@@ -76,11 +94,15 @@ export const UsuarioStorage = ({ children }) => {
         error,
         loading,
         carrinhoUser,
+        setCarrinhoUser,
+        totalCarrinho,
         LoginUsuario,
         Logout,
         verificaStatusLogin,
         adicionarAoCarrinho,
-        pegaPorudotosCarrinho,
+        pegaProdutosCarrinho,
+        pegaTotalCarrinho,
+        removeItemCarrinho,
       }}
     >
       {children}
