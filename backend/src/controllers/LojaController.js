@@ -40,7 +40,6 @@ const readAll = async (req, res) => {
 
 const createLoja = async (req, res) => {
   const { nome, cidade, cnpj, email, senha, rua, bairro, numero } = req.body;
-  console.log(req.body);
   const verifEmail = await takeEmail(email);
 
   if (
@@ -70,7 +69,6 @@ const createLoja = async (req, res) => {
     quantidadeProdutos: 0,
   });
 
-  console.log(lojaCreate);
   return res.json(lojaCreate);
 };
 
@@ -85,6 +83,38 @@ const deleteLoja = async (req, res) => {
   return res.status(400).json({ erro: "Algo deu errado!" });
 };
 
+const pegaProdutosCadastrados = async (req, res) => {
+  const { idLoja } = req.body;
+
+  const dados = await Produto.find({ idLoja });
+
+  return res.json(dados);
+};
+
 const CadastrarProduto = (req, res) => {};
 
-module.exports = { loginLoja, readAll, createLoja, deleteLoja };
+const removerProduto = async (req, res) => {
+  const { idLoja, idProduto } = req.body;
+  let idEncontrado = [];
+
+  const dados = await Produto.find({ idLoja });
+  dados.forEach((item) => {
+    if (item._id.toString().replace('new ObjectId("') === idProduto) {
+      idEncontrado.push(item._id.toString().replace('new ObjectId("'));
+    }
+  });
+
+  const deletado = await Produto.findByIdAndDelete(idEncontrado[0]);
+  if (deletado) return res.json({ removido: "Produto removido com sucesso." });
+
+  return res.status(404).json({ error: "Algo deu errado." });
+};
+
+module.exports = {
+  loginLoja,
+  readAll,
+  createLoja,
+  deleteLoja,
+  removerProduto,
+  pegaProdutosCadastrados,
+};
