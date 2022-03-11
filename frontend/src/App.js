@@ -14,6 +14,7 @@ import Perfil from "./Components/Perfil/Perfil";
 import { LojaStorage } from "./Contexts/LojaContext/LojaContext";
 import AdicionarAoCarrinho from "./Components/Carrinho/AdicionarAoCarrinho/AdicionarAoCarrinho";
 import RemoverProduto from "./Components/RemoverProduto/RemoverProduto";
+import SeusProdutos from "./Components/SeusProdutos/Loja/SeusProdutos";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path=":user/perfil" element={<Perfil />} />
           <Route path="/carrinho" element={<AdicionarAoCarrinho />} />
           <Route path="/:user/remover-produto" element={<RemoverProduto />} />
+          <Route path="/:user/seus-produtos" element={<SeusProdutos />} />
         </Routes>
       </LojaStorage>
     </UsuarioStorage>

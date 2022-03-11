@@ -36,19 +36,20 @@ export const LojaStorage = ({ children }) => {
     categoria,
     marca,
     tamanho,
-    informacoesProduto
+    informacoesProduto,
+    estoque
   ) {
     if (dataLojaLogada) {
       try {
         await api.post("/cadastrar-produto", {
           idLoja: dataLojaLogada.idLoja,
-          emailLoja: dataLojaLogada.email,
           nome: nome,
           preco: preco,
           categoria: categoria,
           marca: marca,
           informacoesProduto: informacoesProduto,
           tamanho: tamanho,
+          estoque,
         });
       } catch (err) {
         console.log(err);

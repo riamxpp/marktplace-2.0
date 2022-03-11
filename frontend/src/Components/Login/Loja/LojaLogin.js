@@ -31,16 +31,16 @@ const LojaLogin = ({
 }) => {
   const { loginLoja, dataLojaLogada } = useContext(LojaContext);
   const navigate = useNavigate();
-  const { validate, error } = useForm();
+  // const { validate, error } = useForm();
 
   async function sendLojaData(event) {
     event.preventDefault();
-    validate(email);
-    validate(senha);
-    if (error) console.log(error);
-    else {
-      console.log("Entrou");
-    }
+    // validate(email);
+    // validate(senha);
+    // if (error) console.log(error);
+    // else {
+    //   console.log("Entrou");
+    // }
     loginLoja(email, senha);
   }
 

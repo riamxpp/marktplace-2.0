@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import Header from "../Header/Header";
 import CadastroProduto from "./CadastroProduto";
@@ -16,19 +16,18 @@ import ButtonEnviar from "../Cadastro/ButtonEnviar";
 import { LojaContext } from "../../Contexts/LojaContext/LojaContext";
 import DescricaoProduto from "./DescriacaoProduto";
 import { useNavigate } from "react-router-dom";
-import useForm from "../../hooks/useForm";
 
 const CadastrarProduto = () => {
   const [nomeProduto, setNomeProduto] = useState("");
   const [preco, setPreco] = useState("");
   const [categoria, setCategoria] = useState("");
   const [marca, setMarca] = useState("");
-  const [tamanhoProduto, setTtamanhoProduto] = useState("");
+  const [tamanhoProduto, setTamanhoProduto] = useState("");
   const [informacoesProduto, setInformacoesProduto] = useState("");
-  const [estoque, setEstoque] = useState("");
+  const [estoque, setEstoque] = useState(0);
   const { dataLojaLogada, cadastroProduto } = useContext(LojaContext);
   const navigate = useNavigate();
-  const { validate, error } = useForm();
+  const primeiroInputRef = useRef(null);
 
   useEffect(() => {
     if (!dataLojaLogada) {
@@ -41,31 +40,24 @@ const CadastrarProduto = () => {
   }
 
   function enviaDadosProduto(event) {
-    [
+    event.preventDefault();
+    cadastroProduto(
       nomeProduto,
       preco,
       categoria,
       marca,
       tamanhoProduto,
       informacoesProduto,
-      estoque,
-    ].forEach((item) => {
-      validate(item);
-    });
-    event.preventDefault();
-
-    if (error) {
-      console.log("deu erro");
-    } else {
-      cadastroProduto(
-        nomeProduto,
-        preco,
-        categoria,
-        marca,
-        tamanhoProduto,
-        informacoesProduto
-      );
-    }
+      estoque
+    );
+    setNomeProduto("");
+    setPreco("");
+    setMarca("");
+    setCategoria("");
+    setTamanhoProduto("");
+    setInformacoesProduto("");
+    setEstoque("");
+    primeiroInputRef.current.focus();
   }
 
   return (
@@ -80,6 +72,7 @@ const CadastrarProduto = () => {
           <AreaInputsInfo>
             <SeguraInput>
               <Input
+                ref={primeiroInputRef}
                 value={nomeProduto}
                 onChange={({ target }) => setNomeProduto(target.value)}
                 type="text"
@@ -146,7 +139,7 @@ const CadastrarProduto = () => {
             <SeguraInput>
               <Input
                 value={tamanhoProduto}
-                onChange={({ target }) => setTtamanhoProduto(target.value)}
+                onChange={({ target }) => setTamanhoProduto(target.value)}
                 title="Informe o tamanho do seu produto"
                 type="text"
                 placeholder="Tamanho do produto"
