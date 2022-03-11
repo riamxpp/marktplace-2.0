@@ -9,6 +9,7 @@ const PaginationComponent = ({ pages, pageAtual, setPageAtual }) => {
       {Array.from(Array(pages), (item, index) => {
         return (
           <Button
+            key={index}
             background={`${pageAtual === index ? "#3A71FA" : ""}`}
             value={index}
             onClick={(event) => {

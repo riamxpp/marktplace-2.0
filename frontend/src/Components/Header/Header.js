@@ -29,7 +29,7 @@ const Header = () => {
       });
     } else if (dataLojaLogada) {
       setNavPerfilLogin({
-        urlLogin: `/${dataLojaLogada.nome}/perfi`,
+        urlLogin: `/${dataLojaLogada.nome}/perfil`,
         urlCadastro: `/sair`,
         viewUser: `${dataLojaLogada.nome}`,
       });

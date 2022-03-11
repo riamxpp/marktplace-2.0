@@ -9,13 +9,14 @@ import AreaInputImage from "./AreaInputImage";
 import AreaInputsInfo from "./AreaInputsInfo";
 import Input from "../Form/Input";
 import VisualizacaoImage from "./VisualizacaoImage";
-import SelectCategoria from "./SelectCategoria";
-import OptionCategoria from "./OptionCategoria";
+import SelectCadastrarProduto from "./SelectCadastrarProduto";
+import OptionCadastrarProduto from "./OptionCadastrarProduto";
 import SeguraInput from "../Geral/SeguraInput";
 import ButtonEnviar from "../Cadastro/ButtonEnviar";
 import { LojaContext } from "../../Contexts/LojaContext/LojaContext";
 import DescricaoProduto from "./DescriacaoProduto";
 import { useNavigate } from "react-router-dom";
+import useForm from "../../hooks/useForm";
 
 const CadastrarProduto = () => {
   const [nomeProduto, setNomeProduto] = useState("");
@@ -24,8 +25,10 @@ const CadastrarProduto = () => {
   const [marca, setMarca] = useState("");
   const [tamanhoProduto, setTtamanhoProduto] = useState("");
   const [informacoesProduto, setInformacoesProduto] = useState("");
+  const [estoque, setEstoque] = useState("");
   const { dataLojaLogada, cadastroProduto } = useContext(LojaContext);
   const navigate = useNavigate();
+  const { validate, error } = useForm();
 
   useEffect(() => {
     if (!dataLojaLogada) {
@@ -38,15 +41,31 @@ const CadastrarProduto = () => {
   }
 
   function enviaDadosProduto(event) {
-    event.preventDefault();
-    cadastroProduto(
+    [
       nomeProduto,
       preco,
       categoria,
       marca,
       tamanhoProduto,
-      informacoesProduto
-    );
+      informacoesProduto,
+      estoque,
+    ].forEach((item) => {
+      validate(item);
+    });
+    event.preventDefault();
+
+    if (error) {
+      console.log("deu erro");
+    } else {
+      cadastroProduto(
+        nomeProduto,
+        preco,
+        categoria,
+        marca,
+        tamanhoProduto,
+        informacoesProduto
+      );
+    }
   }
 
   return (
@@ -80,29 +99,48 @@ const CadastrarProduto = () => {
                 id="preco"
                 width="4rem"
               />
-              <SelectCategoria
+              <SelectCadastrarProduto
                 title="Informe a categoria do seu produto"
                 id="categoria"
                 value={categoria}
                 onChange={({ target }) => setCategoria(target.value)}
               >
-                <OptionCategoria disabled value="">
-                  Selecione
-                </OptionCategoria>
-                <OptionCategoria value="roupa">Roupa</OptionCategoria>
-                <OptionCategoria value="tecnologia">Tecnologia</OptionCategoria>
-                <OptionCategoria value="domestico">Domestico</OptionCategoria>
-                <OptionCategoria value="livros">Livros</OptionCategoria>
-              </SelectCategoria>
+                <OptionCadastrarProduto disabled value="">
+                  Categoria
+                </OptionCadastrarProduto>
+                <OptionCadastrarProduto value="roupa">
+                  Roupa
+                </OptionCadastrarProduto>
+                <OptionCadastrarProduto value="tecnologia">
+                  Tecnologia
+                </OptionCadastrarProduto>
+                <OptionCadastrarProduto value="domestico">
+                  Domestico
+                </OptionCadastrarProduto>
+                <OptionCadastrarProduto value="livros">
+                  Livros
+                </OptionCadastrarProduto>
+              </SelectCadastrarProduto>
             </SeguraInput>
             <SeguraInput>
               <Input
                 value={marca}
+                width="5.2rem"
                 onChange={({ target }) => setMarca(target.value)}
                 type="text"
                 placeholder="Marca"
                 name="marca"
                 id="marca"
+              />
+              <Input
+                width="4rem"
+                title="Informe a quantidade de produto no estoque"
+                value={estoque}
+                onChange={({ target }) => setEstoque(target.value)}
+                type="tel"
+                placeholder="Estoque"
+                name="estoque"
+                id="estoque"
               />
             </SeguraInput>{" "}
             <SeguraInput>

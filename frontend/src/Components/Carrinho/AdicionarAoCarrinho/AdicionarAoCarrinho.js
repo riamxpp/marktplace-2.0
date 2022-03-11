@@ -39,8 +39,6 @@ const AdicionarAoCarrinho = () => {
     }
   }, [data, navigate]);
 
-  console.log(carrinhoUser);
-
   function removeProduto(produto) {
     const copiaCarrinhoUser = carrinhoUser.filter(
       (item) => item.idProduto !== produto.idProduto

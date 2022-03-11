@@ -14,14 +14,13 @@ import ParagrafoContentLoja from "./ParagrafoContentLoja";
 import EnderecoContent from "./EnderecoContent";
 
 const Lojas = () => {
-  const [data, setData] = useState(null);
   const [pageAtual, setPageAtual] = useState(0);
   const itemsPorPage = 5;
   const { pegaDadosLoja, dataAllLojas } = useContext(LojaContext);
 
   useEffect(() => {
     pegaDadosLoja();
-  }, [pegaDadosLoja]);
+  }, []);
 
   if (!dataAllLojas) return <Loading>Carregando</Loading>;
 
@@ -29,14 +28,14 @@ const Lojas = () => {
   const startIndex = pageAtual * itemsPorPage;
   const endIndex = startIndex + itemsPorPage;
   const itemsAtuais = dataAllLojas.slice(startIndex, endIndex);
-
+  console.log(itemsAtuais);
   return (
     <>
       <Header></Header>
       <ContentLojas>
         {itemsAtuais.map((loja) => {
           return (
-            <Loja key={loja.id}>
+            <Loja key={loja._id}>
               <AreaNomeLoja>{loja.nome}</AreaNomeLoja>
               <AreaContentLoja>
                 <EnderecoContent>

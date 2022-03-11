@@ -9,17 +9,19 @@ export const LojaStorage = ({ children }) => {
   const [loadingLoja, setLoadingLoja] = useState(null);
   const [errorLoja, setErrorLoja] = useState(false);
   const [dadosProduto, setDadosProduto] = useState(null);
+  const [produtosCadastrados, setProdutosCadastrados] = useState(null);
 
   async function pegaDadosLoja() {
     try {
       setLoadingLoja(true);
       const dados = await api.get("/ver-lojas");
-      setDataAllLojas(dados.data);
+      if (dados.statusText === "OK") setDataAllLojas(dados.data);
     } catch (err) {
       setErrorLoja(true);
       setDataAllLojas(null);
     } finally {
       setLoadingLoja(false);
+      return;
     }
   }
 
@@ -73,6 +75,17 @@ export const LojaStorage = ({ children }) => {
       setLoadingLoja(false);
     }
   }
+
+  async function removerProduto(idProduto, idLoja) {
+    await api.post("/remover-produto", { idLoja, idProduto });
+    await pegaProdutosCadastrado(idLoja);
+  }
+
+  async function pegaProdutosCadastrado(idLoja) {
+    const dados = await api.post("/pega-produtos-cadastrados", { idLoja });
+    setProdutosCadastrados(dados.data);
+  }
+
   return (
     <LojaContext.Provider
       value={{
@@ -86,6 +99,9 @@ export const LojaStorage = ({ children }) => {
         pegaProdutosCategoria,
         dadosProduto,
         cadastroProduto,
+        produtosCadastrados,
+        pegaProdutosCadastrado,
+        removerProduto,
       }}
     >
       {children}

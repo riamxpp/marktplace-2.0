@@ -31,10 +31,12 @@ const ClienteLogin = ({
 }) => {
   const { LoginUsuario, data } = useContext(UsuarioContext);
   const navigate = useNavigate();
+
   async function sendClientDate(event) {
     event.preventDefault();
     LoginUsuario(email, senha);
   }
+
   useEffect(() => {
     if (data) {
       navigate("/");

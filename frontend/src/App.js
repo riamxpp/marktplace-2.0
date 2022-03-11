@@ -13,6 +13,7 @@ import "./Global.css";
 import Perfil from "./Components/Perfil/Perfil";
 import { LojaStorage } from "./Contexts/LojaContext/LojaContext";
 import AdicionarAoCarrinho from "./Components/Carrinho/AdicionarAoCarrinho/AdicionarAoCarrinho";
+import RemoverProduto from "./Components/RemoverProduto/RemoverProduto";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           />
           <Route path=":user/perfil" element={<Perfil />} />
           <Route path="/carrinho" element={<AdicionarAoCarrinho />} />
+          <Route path="/:user/remover-produto" element={<RemoverProduto />} />
         </Routes>
       </LojaStorage>
     </UsuarioStorage>

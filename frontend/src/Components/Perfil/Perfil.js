@@ -16,7 +16,7 @@ const Perfil = () => {
     if (!data && !dataLojaLogada) {
       navigate("/login");
     }
-  }, []);
+  }, [data, dataLojaLogada, navigate]);
 
   return (
     <>
