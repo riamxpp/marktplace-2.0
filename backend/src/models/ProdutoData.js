@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const ProdutoData = new mongoose.Schema({
   idLoja: String,
-  emailLoja: String,
   nome: String,
   preco: Number,
   categoria: String,

@@ -91,8 +91,6 @@ const pegaProdutosCadastrados = async (req, res) => {
   return res.json(dados);
 };
 
-const CadastrarProduto = (req, res) => {};
-
 const removerProduto = async (req, res) => {
   const { idLoja, idProduto } = req.body;
   let idEncontrado = [];

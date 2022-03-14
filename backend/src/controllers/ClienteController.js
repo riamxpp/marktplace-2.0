@@ -1,4 +1,5 @@
 const Cliente = require("../models/ClienteData");
+const { sign } = require("jsonwebtoken");
 
 const loginCliente = async (req, res) => {
   const { email, senha } = req.body;
@@ -8,6 +9,18 @@ const loginCliente = async (req, res) => {
   });
 
   if (usuarioDados) {
+    const token = sign(
+      {
+        _id: usuarioDados._id,
+        nome: usuarioDados.nome,
+        email: usuarioDados.email,
+        cidade: usuarioDados.cidade,
+      },
+      "woeprwe90324",
+      {
+        expiresIn: 3600,
+      }
+    );
     req.session.usuarioLogado = true;
     const dadosUsuario = {
       idUser: usuarioDados._id,
@@ -17,7 +30,7 @@ const loginCliente = async (req, res) => {
       cidade: usuarioDados.cidade,
     };
     req.session.dadosUsuario = dadosUsuario;
-    return res.json({ dadosUsuario, logado: true });
+    return res.json({ dadosUsuario, logado: true, token });
   }
   return res.json({ error: "Usuario não encontrado" });
 };

@@ -4,19 +4,17 @@ const Loja = require("../models/LojaData");
 const cadastroProduto = async (req, res) => {
   const {
     idLoja,
-    emailLoja,
     nome,
     preco,
     categoria,
     marca,
-    tamanho,
     informacoesProduto,
+    tamanho,
+    estoque,
   } = req.body;
-  console.log(req.body);
   // if (req.session.lojaLogado) {
   const produto = await Produto.create({
     idLoja,
-    emailLoja,
     nome,
     preco,
     categoria,
@@ -33,7 +31,6 @@ const cadastroProduto = async (req, res) => {
 
 const verProdutos = async (req, res) => {
   const allProducts = await Produto.find();
-  console.log(allProducts);
   return res.json(allProducts);
 };
 
