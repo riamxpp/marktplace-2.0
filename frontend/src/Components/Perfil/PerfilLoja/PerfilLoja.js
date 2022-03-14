@@ -71,7 +71,7 @@ const PerfilLoja = () => {
           </Link>
         </Option>
         <Option>
-          <Link className="linkPerfil" to="/ ">
+          <Link className="linkPerfil" to="/feedback">
             <SvgContent>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

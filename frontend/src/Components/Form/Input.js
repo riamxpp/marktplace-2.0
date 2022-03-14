@@ -1,9 +1,10 @@
+import React from "react";
 import styled from "styled-components";
 
-const Input = styled.input`
+const InputComponent = styled.input`
   width: ${({ width }) => width};
   height: 1.5rem;
-  border-radius: 4px;
+  border-radius: 2px;
   border: 2px solid #3337de;
   padding-left: ${({ padding }) => (padding ? padding : "0.5rem")};
   &:focus {
@@ -11,5 +12,29 @@ const Input = styled.input`
     border: 2px solid transparent;
   }
 `;
+
+const Input = ({
+  id,
+  name,
+  placeholder,
+  type,
+  value,
+  onChange,
+  width,
+  padding,
+}) => {
+  return (
+    <InputComponent
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      type={type}
+      value={value}
+      onChange={onChange}
+      width={width}
+      padding={padding}
+    ></InputComponent>
+  );
+};
 
 export default Input;
