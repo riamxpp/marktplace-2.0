@@ -3,7 +3,7 @@ const { verify } = require("jsonwebtoken");
 const isAuthenticated = (req, res, next) => {
   try {
     const token = req.headers.authorization.replace("Bearer ", "");
-    const validateToken = verify(token, "woeprwe90324");
+    const validateToken = verify(token, '43543jsdwef');
     req["tokenData"] = validateToken;
     next();
   } catch (err) {

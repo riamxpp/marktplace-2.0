@@ -1,3 +1,4 @@
+const { sign } = require("jsonwebtoken");
 const Loja = require("../models/LojaData");
 const Produto = require("../models/ProdutoData");
 
@@ -9,6 +10,19 @@ const loginLoja = async (req, res) => {
   });
 
   if (data) {
+    const token = sign({
+      idLoja: data._id,
+      email: data.email,
+      nome: data.nome,
+      cidade: data.cidade,
+      quantidadeProdutos: data.quantidadeProdutos,
+      produtos: data.produtos,
+    }, 
+    '43543jsdwef',
+    {
+      expiresIn: 3600,
+    });
+
     req.session.lojaLogado = true;
     let dadosLoja = {
       idLoja: data._id,
@@ -16,8 +30,8 @@ const loginLoja = async (req, res) => {
       nome: data.nome,
       cidade: data.cidade,
       quantidadeProdutos: data.quantidadeProdutos,
-      cnpj: data.cnpj,
       produtos: data.produtos,
+      token
     };
     req.session.dadosLoja = dadosLoja;
 

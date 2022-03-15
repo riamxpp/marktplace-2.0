@@ -1,13 +1,24 @@
 const { Router } = require("express");
 const routes = new Router();
-const ClienteController = require("../controllers/ClienteController");
+const {
+  cadastrarCliente,
+  readAllCliente,
+  AdicionarAoCarrinho,
+  loginCliente,
+  pegaProdutosCarrinho,
+  somaTotalCarrinho,
+  removeItemCarrinho,
+  tokenUser,
+} = require("../controllers/ClienteController");
+const { isAuthenticated } = require("../middleware/isAuthenticated");
 
-routes.post("/cadastro-cliente", ClienteController.cadastrarCliente);
-routes.get("/todos-clientes", ClienteController.readAllCliente);
-routes.put("/adicionar-ao-carrinho", ClienteController.AdicionarAoCarrinho);
-routes.post("/login-cliente", ClienteController.loginCliente);
-routes.post("/pega-carrinho-cliente", ClienteController.pegaProdutosCarrinho);
-routes.post("/total-carrinho", ClienteController.somaTotalCarrinho);
-routes.post("/remove-do-carrinho", ClienteController.removeItemCarrinho);
+routes.post("/cadastro-cliente", cadastrarCliente);
+routes.get("/todos-clientes", readAllCliente);
+routes.put("/adicionar-ao-carrinho", isAuthenticated, AdicionarAoCarrinho);
+routes.post("/login-cliente", loginCliente);
+routes.post("/pega-carrinho-cliente", isAuthenticated, pegaProdutosCarrinho);
+routes.post("/total-carrinho", isAuthenticated, somaTotalCarrinho);
+routes.post("/remove-do-carrinho", isAuthenticated, removeItemCarrinho);
+routes.get("/verifica-token", tokenUser);
 
 module.exports = routes;

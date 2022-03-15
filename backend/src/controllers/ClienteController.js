@@ -16,23 +16,22 @@ const loginCliente = async (req, res) => {
         email: usuarioDados.email,
         cidade: usuarioDados.cidade,
       },
-      "woeprwe90324",
+      '43543jsdwef',
       {
         expiresIn: 3600,
       }
     );
-    req.session.usuarioLogado = true;
     const dadosUsuario = {
       idUser: usuarioDados._id,
       nome: usuarioDados.nome,
       email: usuarioDados.email,
-      cpf: usuarioDados.cpf,
       cidade: usuarioDados.cidade,
+      token,
     };
     req.session.dadosUsuario = dadosUsuario;
-    return res.json({ dadosUsuario, logado: true, token });
+    return res.json({ dadosUsuario });
   }
-  return res.json({ error: "Usuario não encontrado" });
+  return res.status(401).json({ error: "Usuário não encontrado" });
 };
 
 const takeEmail = async (req, res) => {
@@ -126,7 +125,8 @@ const somaTotalCarrinho = async (req, res) => {
   const { _id } = req.body;
   const dadosPrev = await retornaUmUsuario(_id);
   let total = 0;
-  dadosPrev.carrinho.map((item) => (total += item.preco));
+  console.log(dadosPrev);
+  dadosPrev.carrinho.map((item) => (total += +item.preco));
   return res.json(total);
 };
 
@@ -143,6 +143,12 @@ const removeItemCarrinho = async (req, res) => {
   );
 };
 
+const tokenUser = (req, res) => {
+  if (req.session.dadosUsuario.token)
+    return res.json(req.session.dadosUsuario.token);
+  return res.status(400).json({ error: "Faça login" });
+};
+
 module.exports = {
   loginCliente,
   readOneCliente,
@@ -153,4 +159,5 @@ module.exports = {
   pegaProdutosCarrinho,
   somaTotalCarrinho,
   removeItemCarrinho,
+  tokenUser,
 };
