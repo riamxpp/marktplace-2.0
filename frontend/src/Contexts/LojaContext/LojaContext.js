@@ -26,8 +26,15 @@ export const LojaStorage = ({ children }) => {
   }
 
   async function loginLoja(email, senha) {
-    const dados = await api.post("/login-loja", { email, senha });
-    setDataLojaLogada(dados.data);
+    try {
+      const dados = await api.post("/login-loja", 
+      { email, senha }
+      );
+      setDataLojaLogada(dados.data);
+    }catch(err) {
+      console.log(err)
+    }
+    
   }
 
   async function cadastroProduto(
@@ -50,7 +57,8 @@ export const LojaStorage = ({ children }) => {
           informacoesProduto: informacoesProduto,
           tamanho: tamanho,
           estoque,
-        });
+        }, 
+        { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}});
       } catch (err) {
         console.log(err);
       }
@@ -67,6 +75,8 @@ export const LojaStorage = ({ children }) => {
       setLoadingLoja(true);
       const dados = await api.post("/pega-produto-categoria", {
         categoria: categoria,
+      },
+        { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}
       });
       setDadosProduto(dados);
     } catch (err) {
@@ -78,13 +88,27 @@ export const LojaStorage = ({ children }) => {
   }
 
   async function removerProduto(idProduto, idLoja) {
-    await api.post("/remover-produto", { idLoja, idProduto });
-    await pegaProdutosCadastrado(idLoja);
+    try {
+      await api.post("/remover-produto", 
+      { idLoja, idProduto },
+      { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}}
+      );
+      await pegaProdutosCadastrado(idLoja); 
+    }catch(err){
+      console.log(err)
+    }
   }
 
   async function pegaProdutosCadastrado(idLoja) {
-    const dados = await api.post("/pega-produtos-cadastrados", { idLoja });
-    setProdutosCadastrados(dados.data);
+    try {
+      const dados = await api.post("/pega-produtos-cadastrados", 
+      { idLoja }, 
+      { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}}
+      );
+      setProdutosCadastrados(dados.data);
+    }catch(err) {
+      console.log(err)
+    }
   }
 
   return (

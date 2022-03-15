@@ -55,35 +55,75 @@ export const UsuarioStorage = ({ children }) => {
     informacoesProduto,
     estoque
   ) {
-    await api.put("/adicionar-ao-carrinho", {
-      _id: idUser,
-      idProduto,
-      nome,
-      categoria,
-      preco,
-      marca,
-      informacoesProduto,
-      estoque,
+    try {
+      await api.put("/adicionar-ao-carrinho", {
+        _id: idUser,
+        idProduto,
+        nome,
+        categoria,
+        preco,
+        marca,
+        informacoesProduto,
+        estoque,
+      }, { headers: 
+        { 
+          "Authorization": `Bearer ${data.dadosUsuario.token}`
+      }
     });
+    }catch(err) {
+      console.log(err);
+    }
+   
   }
 
   async function pegaProdutosCarrinho(_id) {
-    const dados = await api.post("/pega-carrinho-cliente", { _id });
-    setCarrinhoUser(dados.data.carrinho);
-    return carrinhoUser;
+    console.log(data.dadosUsuario);
+    try {
+      if (data) {
+        const dados = await api.post(
+          "/pega-carrinho-cliente",
+          { _id },
+          {
+            headers: {
+              "Authorization": `Bearer ${data.dadosUsuario.token}`,
+            },
+          }
+        )
+        setCarrinhoUser(dados.data.carrinho);
+        return carrinhoUser;
+      }
+      
+    }catch(err) {
+      console.log(err)
+    }
+  
   }
 
   async function pegaTotalCarrinho(_id) {
-    const dados = await api.post("/total-carrinho", { _id });
-    setTotalCarrinho(dados.data);
-    return totalCarrinho;
+    try {
+      const dados = await api.post("/total-carrinho", { _id }, { 
+       headers: { "Authorization": `Bearer ${data.dadosUsuario.token}`}
+      });
+      setTotalCarrinho(dados.data);
+      return totalCarrinho;
+    }catch(err){
+      console.log(err)
+    }
+   
   }
 
   async function removeItemCarrinho(carrinho, _id) {
-    await api.post("/remove-do-carrinho", {
-      carrinhoProduto: carrinho,
-      _id,
-    });
+    try {
+      await api.post("/remove-do-carrinho", {
+        carrinhoProduto: carrinho,
+        _id,
+      }, { 
+        headers: { "Authorization": `Bearer ${data.dadosUsuario.token}`}
+       });
+    }catch(err) {
+      console.log(err);
+    }
+    
   }
 
   return (

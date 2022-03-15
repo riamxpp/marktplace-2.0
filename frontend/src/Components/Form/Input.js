@@ -22,6 +22,7 @@ const Input = ({
   onChange,
   width,
   padding,
+  autoComplete,
 }) => {
   return (
     <InputComponent
@@ -33,6 +34,7 @@ const Input = ({
       onChange={onChange}
       width={width}
       padding={padding}
+      autoComplete={autoComplete}
     ></InputComponent>
   );
 };

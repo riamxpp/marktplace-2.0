@@ -7,7 +7,6 @@ import Titulo from "../../Geral/Titulo";
 import ErrorMessage from "../ErrorMessage";
 import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
 import { useNavigate } from "react-router-dom";
-import useForm from "../../../hooks/useForm";
 
 const LojaForm = styled.form`
   width: 90%;
@@ -31,16 +30,9 @@ const LojaLogin = ({
 }) => {
   const { loginLoja, dataLojaLogada } = useContext(LojaContext);
   const navigate = useNavigate();
-  // const { validate, error } = useForm();
 
   async function sendLojaData(event) {
     event.preventDefault();
-    // validate(email);
-    // validate(senha);
-    // if (error) console.log(error);
-    // else {
-    //   console.log("Entrou");
-    // }
     loginLoja(email, senha);
   }
 

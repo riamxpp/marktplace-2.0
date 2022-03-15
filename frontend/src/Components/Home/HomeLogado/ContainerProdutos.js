@@ -40,8 +40,6 @@ const ContainerProduto = ({ produtoSelecionado }) => {
     pegaProdutosCategoria(produtoSelecionado);
   }, [produtoSelecionado, data, navigate]);
 
-  console.log(dadosProduto);
-
   if (loading) return <div>Loading...</div>;
   return (
     <DivProduto>
