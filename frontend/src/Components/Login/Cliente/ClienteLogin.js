@@ -31,7 +31,6 @@ const ClienteLogin = ({
 }) => {
   const { LoginUsuario, data } = useContext(UsuarioContext);
   const navigate = useNavigate();
-  console.log(data);
 
   async function sendClientDate(event) {
     event.preventDefault();

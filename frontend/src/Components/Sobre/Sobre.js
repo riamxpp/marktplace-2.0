@@ -42,7 +42,7 @@ const Sobre = () => {
               venenatis ad lacus donec vitae, dapibus magna ante hac nam magna
               nostra enim.
             </TextoSobre>
-            <SubContentQuemSomos href="#">A instituição</SubContentQuemSomos>
+            <SubContentQuemSomos>A instituição</SubContentQuemSomos>
           </SeguraContent>
         </ContentQuemSomos>
         <ContentQuemSomos>
@@ -54,7 +54,7 @@ const Sobre = () => {
               venenatis ad lacus donec vitae, dapibus magna ante hac nam magna
               nostra enim.
             </TextoSobre>
-            <SubContentQuemSomos href="#">
+            <SubContentQuemSomos>
               Representatividade
             </SubContentQuemSomos>
           </SeguraContent>
@@ -68,7 +68,7 @@ const Sobre = () => {
               venenatis ad lacus donec vitae, dapibus magna ante hac nam magna
               nostra enim.
             </TextoSobre>
-            <SubContentQuemSomos href="#">História</SubContentQuemSomos>
+            <SubContentQuemSomos>História</SubContentQuemSomos>
           </SeguraContent>
         </ContentQuemSomos>
       </QuemSomos>

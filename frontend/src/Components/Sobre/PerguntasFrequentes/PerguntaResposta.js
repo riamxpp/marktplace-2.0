@@ -8,7 +8,7 @@ import Texto from "./Texto";
 const ContentPerguntasFrequentes = styled.article`
   width: 80%;
   background-color: #fff;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   border-radius: 4px;
 `;
 
@@ -21,8 +21,8 @@ const PerguntaResposta = ({ pergunta, resposta }) => {
 
   return (
     <>
-      <ContentPerguntasFrequentes onClick={mostraResposta}>
-        <Pergunta>
+      <ContentPerguntasFrequentes >
+        <Pergunta onClick={mostraResposta}>
           <Texto>{pergunta}</Texto>
           <Button>{activeResponse ? "-" : "+"}</Button>
         </Pergunta>

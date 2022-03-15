@@ -28,7 +28,6 @@ const Lojas = () => {
   const startIndex = pageAtual * itemsPorPage;
   const endIndex = startIndex + itemsPorPage;
   const itemsAtuais = dataAllLojas.slice(startIndex, endIndex);
-  console.log(itemsAtuais);
   return (
     <>
       <Header></Header>
