@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 import Header from "../Header/Header";
+import TituloH1 from '../Reutilizavel/TituloH1'
 import CadastroProduto from "./CadastroProduto";
 import Footer from "../Footer/Footer";
 import FormProduto from "./FormProduto";
-import InputImage from "./InputImage";
-import AreaInputImage from "./AreaInputImage";
 import AreaInputsInfo from "./AreaInputsInfo";
 import Input from "../Form/Input";
-import VisualizacaoImage from "./VisualizacaoImage";
 import SelectCadastrarProduto from "./SelectCadastrarProduto";
 import OptionCadastrarProduto from "./OptionCadastrarProduto";
 import SeguraInput from "../Geral/SeguraInput";
@@ -35,9 +33,7 @@ const CadastrarProduto = () => {
     }
   }, [dataLojaLogada, navigate]);
 
-  function arquivoSelecionado(event) {
-    console.log(event.target.files[0]);
-  }
+
 
   function enviaDadosProduto(event) {
     event.preventDefault();
@@ -64,11 +60,8 @@ const CadastrarProduto = () => {
     <>
       <Header />
       <CadastroProduto>
+        <TituloH1 size="2rem">Cadastrar Produto</TituloH1>
         <FormProduto onSubmit={enviaDadosProduto}>
-          <AreaInputImage>
-            <VisualizacaoImage />
-            <InputImage type="file" onChange={arquivoSelecionado} />
-          </AreaInputImage>
           <AreaInputsInfo>
             <SeguraInput>
               <Input
@@ -79,6 +72,7 @@ const CadastrarProduto = () => {
                 placeholder="Nome do produto"
                 name="nome"
                 id="nome"
+                width="40%"
               />
             </SeguraInput>
             <SeguraInput gap={"1rem"}>
@@ -90,7 +84,7 @@ const CadastrarProduto = () => {
                 placeholder="Preco"
                 name="preco"
                 id="preco"
-                width="4rem"
+                width="9.6rem"
               />
               <SelectCadastrarProduto
                 title="Informe a categoria do seu produto"
@@ -118,7 +112,7 @@ const CadastrarProduto = () => {
             <SeguraInput>
               <Input
                 value={marca}
-                width="5.2rem"
+                width="11rem"
                 onChange={({ target }) => setMarca(target.value)}
                 type="text"
                 placeholder="Marca"
@@ -145,6 +139,7 @@ const CadastrarProduto = () => {
                 placeholder="Tamanho do produto"
                 name="tamanho"
                 id="tamanho"
+                width='40%'
               />
             </SeguraInput>
             <SeguraInput>
@@ -152,6 +147,7 @@ const CadastrarProduto = () => {
                 value={informacoesProduto}
                 onChange={({ target }) => setInformacoesProduto(target.value)}
                 placeholder="Descrição/Informações produto"
+                width="40%"
               />
             </SeguraInput>
             <SeguraInput>

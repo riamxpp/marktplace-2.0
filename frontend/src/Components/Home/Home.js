@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      {data ? <HomeLogado /> : <HomeDeslogado />}
+        {data ? <HomeLogado /> : <HomeDeslogado />}
       <Footer />
     </>
   );

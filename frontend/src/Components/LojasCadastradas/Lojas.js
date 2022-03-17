@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import Loading from "../../hooks/Loading";
+import BackgroundLoading from "../../hooks/BackgroundLoading";
 import Header from "../Header/Header";
 import ContentLojas from "./ContentLojas";
 import Loja from "./Loja";
-import PaginationComponent from "./PaginationComponent";
+import PaginationComponent from "../../hooks/PaginationComponent";
 import Footer from "../Footer/Footer";
 import { LojaContext } from "../../Contexts/LojaContext/LojaContext";
 import AreaNomeLoja from "./AreaNomeLoja";
@@ -12,6 +12,7 @@ import AreaContentLoja from "./AreaContentLoja";
 import TituloAreaContentLoja from "./TituloAreaContentLoja";
 import ParagrafoContentLoja from "./ParagrafoContentLoja";
 import EnderecoContent from "./EnderecoContent";
+import Loading from "../../hooks/Loading";
 
 const Lojas = () => {
   const [pageAtual, setPageAtual] = useState(0);
@@ -22,8 +23,12 @@ const Lojas = () => {
     pegaDadosLoja();
   }, []);
 
-  if (!dataAllLojas) return <Loading>Carregando</Loading>;
-
+  if (!dataAllLojas)
+    return (
+      <BackgroundLoading>
+        <Loading></Loading>
+      </BackgroundLoading>
+    );
   const pages = Math.ceil(dataAllLojas.length / itemsPorPage);
   const startIndex = pageAtual * itemsPorPage;
   const endIndex = startIndex + itemsPorPage;

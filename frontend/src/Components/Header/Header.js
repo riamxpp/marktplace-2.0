@@ -8,6 +8,8 @@ import MobileButtonComponent from "./MobileButton";
 import Li from "./Li";
 import { UsuarioContext } from "../../Contexts/UsuarioContext/UsuarioContext";
 import { LojaContext } from "../../Contexts/LojaContext/LojaContext";
+import NavegacaoHeader from "./NavegacaoHeader";
+import SeguraContentHeader from "./SeguraContentHeader";
 
 const Header = () => {
   const [activeMobilleButton, setActiveMobilleButon] = useState(null);
@@ -44,53 +46,55 @@ const Header = () => {
 
   return (
     <MyHeader>
-      <Link className="link" to="/home">
-        MarktPlace
-      </Link>
-      <nav>
-        <Ul ref={ulRef} shadow={activeMobilleButton}>
-          <MobileButtonComponent
-            activeMobilleButton={activeMobilleButton}
-            setActiveMobilleButon={setActiveMobilleButon}
-            ulRef={ulRef}
-          ></MobileButtonComponent>
-          {data && (
-            <Li>
-              <Link to="/carrinho">Carrinho</Link>
+      <SeguraContentHeader>
+        <Link className="link" to="/home">
+          MarktPlace
+        </Link>
+        <NavegacaoHeader>
+          <Ul ref={ulRef} shadow={activeMobilleButton}>
+            <MobileButtonComponent
+              activeMobilleButton={activeMobilleButton}
+              setActiveMobilleButon={setActiveMobilleButon}
+              ulRef={ulRef}
+            ></MobileButtonComponent>
+            {data && (
+              <Li>
+                <Link to="/carrinho">Carrinho</Link>
+              </Li>
+            )}
+            <Li display={activeMobilleButton}>
+              <Link id="linkMobileButton" className="link" to="/sobre">
+                Sobre
+              </Link>
             </Li>
-          )}
-          <Li display={activeMobilleButton}>
-            <Link id="linkMobileButton" className="link" to="/sobre">
-              Sobre
-            </Link>
-          </Li>
-          <Li display={activeMobilleButton}>
-            <Link id="linkMobileButton" className="link" to="/lojas">
-              Lojas{" "}
-            </Link>
-          </Li>
+            <Li display={activeMobilleButton}>
+              <Link id="linkMobileButton" className="link" to="/lojas">
+                Lojas{" "}
+              </Link>
+            </Li>
 
-          <Li display={activeMobilleButton}>
-            <Link
-              id="linkMobileButton"
-              className="link"
-              to={navPerfilLogin.urlLogin}
-            >
-              {navPerfilLogin.viewUser}
-            </Link>
-          </Li>
-          <Li display={activeMobilleButton}>
-            <Link
-              id="linkMobileButton"
-              className="link"
-              onClick={data ? Logout : () => ""}
-              to={navPerfilLogin.urlCadastro}
-            >
-              {data || dataLojaLogada ? "Sair" : "Cadastre-se"}
-            </Link>
-          </Li>
-        </Ul>
-      </nav>
+            <Li display={activeMobilleButton}>
+              <Link
+                id="linkMobileButton"
+                className="link"
+                to={navPerfilLogin.urlLogin}
+              >
+                {navPerfilLogin.viewUser}
+              </Link>
+            </Li>
+            <Li display={activeMobilleButton}>
+              <Link
+                id="linkMobileButton"
+                className="link"
+                onClick={data ? Logout : () => ""}
+                to={navPerfilLogin.urlCadastro}
+              >
+                {data || dataLojaLogada ? "Sair" : "Cadastre-se"}
+              </Link>
+            </Li>
+          </Ul>
+        </NavegacaoHeader>
+      </SeguraContentHeader>
     </MyHeader>
   );
 };

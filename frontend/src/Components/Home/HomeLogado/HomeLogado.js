@@ -17,7 +17,6 @@ const SectionHomeLogado = styled.section`
 
 const HomeLogado = () => {
   const [produtoSelecionado, setProdutoSelecionado] = useState("tecnologia");
-
   return (
     <SectionHomeLogado>
       <ContainerEscolheProduto setProdutoSelecionado={setProdutoSelecionado} />

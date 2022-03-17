@@ -5,6 +5,6 @@ const { isAuthenticated } = require("../middleware/isAuthenticated");
 
 routes.get("/pega-produtos", isAuthenticated, ProdutoController.verProdutos);
 routes.post("/cadastrar-produto", isAuthenticated, ProdutoController.cadastroProduto);
-routes.post("/pega-produto-categoria", isAuthenticated, ProdutoController.pegaProdutoCategoria);
+routes.post("/pega-produto-categoria", ProdutoController.pegaProdutoCategoria);
 
 module.exports = routes;

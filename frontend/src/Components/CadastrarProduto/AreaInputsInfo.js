@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const AreaInputsInfo = styled.article`
-  width: 40%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

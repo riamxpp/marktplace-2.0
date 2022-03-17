@@ -34,6 +34,16 @@ const DepoimentosComponent = () => {
   const pessoaRef = useRef(null);
   const depoimentoRef = useRef(null);
 
+  useEffect(() => {
+    let arrumaSlide = setInterval(() => {
+      window.addEventListener("resize", movimentaPessoa2);
+    }, 500);
+    return () => {
+      clearInterval(arrumaSlide);
+      window.addEventListener("resize", movimentaPessoa2);
+    };
+  }, []);
+
   function movimentaPessoa1() {
     setMovimento(pessoaRef.current.offsetWidth);
 
@@ -64,15 +74,6 @@ const DepoimentosComponent = () => {
     });
     setMovimentoDepoimento(2 * -(depoimentoRef.current.offsetWidth + 16));
   }
-
-  useEffect(() => {
-    setMovimentoDepoimento(-(depoimentoRef.current.offsetWidth + 16));
-    window.addEventListener("resize", movimentaPessoa2);
-    return () => {
-      window.addEventListener("resize", movimentaPessoa2);
-    };
-  }, []);
-
   return (
     <Depoimentos>
       <ContentDepoimentos>

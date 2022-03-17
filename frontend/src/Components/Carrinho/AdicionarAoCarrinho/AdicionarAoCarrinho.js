@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Header from "../../Header/Header";
 import ContainerProdutosCarrinho from "./ContainerProdutosCarrinho";
@@ -19,6 +19,7 @@ import ExcluirProdutoCarrinho from "./ExcluirProdutoCarrinho";
 import Footer from "../../Footer/Footer";
 
 const AdicionarAoCarrinho = () => {
+  const [animaCarrinho, setAnimaCarrinho] = useState(false);
   const {
     pegaProdutosCarrinho,
     data,
@@ -77,7 +78,7 @@ const AdicionarAoCarrinho = () => {
           ))}
         </ContainerMostraProdutosCarrinho>
 
-        <ContainerOperacoesCarrinho>
+        <ContainerOperacoesCarrinho onClick={() => setAnimaCarrinho(true)}>
           <SubTotalCarrinho>
             Subtotal ( {carrinhoUser?.length}{" "}
             {carrinhoUser?.length > 1 ? "items" : "item"} ): R$ {totalCarrinho}

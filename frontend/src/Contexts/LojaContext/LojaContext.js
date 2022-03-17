@@ -75,8 +75,6 @@ export const LojaStorage = ({ children }) => {
       setLoadingLoja(true);
       const dados = await api.post("/pega-produto-categoria", {
         categoria: categoria,
-      },
-        { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}
       });
       setDadosProduto(dados);
     } catch (err) {

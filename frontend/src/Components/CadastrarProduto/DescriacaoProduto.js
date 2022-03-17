@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const DescricaoProduto = styled.textarea`
-  width: 10.5rem;
+  width: ${({width}) => width ? width : '10.5rem'};
   height: 3rem;
   border-radius: 4px;
   border: 2px solid #3337de;

@@ -125,7 +125,6 @@ const somaTotalCarrinho = async (req, res) => {
   const { _id } = req.body;
   const dadosPrev = await retornaUmUsuario(_id);
   let total = 0;
-  console.log(dadosPrev);
   dadosPrev.carrinho.map((item) => (total += +item.preco));
   return res.json(total);
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
-import Button from "./Button";
-import ContentButton from "./ContentButton";
+import Button from "../Components/LojasCadastradas/Button";
+import ContentButton from "../Components/LojasCadastradas/ContentButton";
 
 const PaginationComponent = ({ pages, pageAtual, setPageAtual }) => {
   return (

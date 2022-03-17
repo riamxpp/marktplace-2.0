@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const TituloH1 = styled.h1`
   color: #fff;
-  font-size: ${({ size }) => size};
+  font-size: ${({ size }) => size ? size : "1.5rem"};
 `;
 
 export default TituloH1;

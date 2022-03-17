@@ -16,6 +16,7 @@ import AdicionarAoCarrinho from "./Components/Carrinho/AdicionarAoCarrinho/Adici
 import RemoverProduto from "./Components/RemoverProduto/RemoverProduto";
 import SeusProdutos from "./Components/SeusProdutos/Loja/SeusProdutos";
 import FeedBack from "./Components/FeedBack/FeedBack";
+import HomeLogado from "./Components/Home/HomeLogado/HomeLogado";
 
 function App() {
   return (
