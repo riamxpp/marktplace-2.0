@@ -61,7 +61,8 @@ const DepoimentosComponent = () => {
       pessoa2: true,
       pessoa3: false,
     });
-    setMovimentoDepoimento(-(depoimentoRef.current.offsetWidth + 16));
+    if (depoimentoRef.current.offsetWidth)
+      setMovimentoDepoimento(-(depoimentoRef.current.offsetWidth + 16));
   }
 
   function movimentaPessoa3() {

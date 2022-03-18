@@ -56,28 +56,30 @@ export const UsuarioStorage = ({ children }) => {
     estoque
   ) {
     try {
-      await api.put("/adicionar-ao-carrinho", {
-        _id: idUser,
-        idProduto,
-        nome,
-        categoria,
-        preco,
-        marca,
-        informacoesProduto,
-        estoque,
-      }, { headers: 
-        { 
-          "Authorization": `Bearer ${data.dadosUsuario.token}`
-      }
-    });
-    }catch(err) {
+      await api.put(
+        "/adicionar-ao-carrinho",
+        {
+          _id: idUser,
+          idProduto,
+          nome,
+          categoria,
+          preco,
+          marca,
+          informacoesProduto,
+          estoque,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${data.dadosUsuario.token}`,
+          },
+        }
+      );
+    } catch (err) {
       console.log(err);
     }
-   
   }
 
   async function pegaProdutosCarrinho(_id) {
-    console.log(data.dadosUsuario);
     try {
       if (data) {
         const dados = await api.post(
@@ -85,45 +87,49 @@ export const UsuarioStorage = ({ children }) => {
           { _id },
           {
             headers: {
-              "Authorization": `Bearer ${data.dadosUsuario.token}`,
+              Authorization: `Bearer ${data.dadosUsuario.token}`,
             },
           }
-        )
+        );
         setCarrinhoUser(dados.data.carrinho);
         return carrinhoUser;
       }
-      
-    }catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  
   }
 
   async function pegaTotalCarrinho(_id) {
     try {
-      const dados = await api.post("/total-carrinho", { _id }, { 
-       headers: { "Authorization": `Bearer ${data.dadosUsuario.token}`}
-      });
+      const dados = await api.post(
+        "/total-carrinho",
+        { _id },
+        {
+          headers: { Authorization: `Bearer ${data.dadosUsuario.token}` },
+        }
+      );
       setTotalCarrinho(dados.data);
       return totalCarrinho;
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-   
   }
 
   async function removeItemCarrinho(carrinho, _id) {
     try {
-      await api.post("/remove-do-carrinho", {
-        carrinhoProduto: carrinho,
-        _id,
-      }, { 
-        headers: { "Authorization": `Bearer ${data.dadosUsuario.token}`}
-       });
-    }catch(err) {
+      await api.post(
+        "/remove-do-carrinho",
+        {
+          carrinhoProduto: carrinho,
+          _id,
+        },
+        {
+          headers: { Authorization: `Bearer ${data.dadosUsuario.token}` },
+        }
+      );
+    } catch (err) {
       console.log(err);
     }
-    
   }
 
   return (

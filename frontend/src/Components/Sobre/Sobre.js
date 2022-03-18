@@ -18,16 +18,14 @@ const Sobre = () => {
     <>
       <Header></Header>
       <Content url={background}>
-        <TituloSobre border="2px solid #3337de" padding=" 2rem 0">
-          Sobre nos
-        </TituloSobre>
-        <TextoSobre width="55%">
+        <TituloSobre>Sobre nos</TituloSobre>
+        <TextoSobre>
           Lorem ipsum mollis ligula nec nostra suspendisse ad gravida venenatis
           ad lacus donec vitae, dapibus magna ante hac nam magna nostra enim
           mauris praesent ligula hac. nisi felis dictum imperdiet libero ligula
           dui eleifend dictumst feugiat maecenas turpis, nisi vitae elit.{" "}
         </TextoSobre>
-        <TextoSobre width="55%">
+        <TextoSobre>
           Lorem ipsum mollis ligula nec nostra suspendisse ad gravida venenatis
           ad lacus donec vitae, dapibus magna ante hac nam magna nostra enim.
         </TextoSobre>
@@ -54,9 +52,7 @@ const Sobre = () => {
               venenatis ad lacus donec vitae, dapibus magna ante hac nam magna
               nostra enim.
             </TextoSobre>
-            <SubContentQuemSomos>
-              Representatividade
-            </SubContentQuemSomos>
+            <SubContentQuemSomos>Representatividade</SubContentQuemSomos>
           </SeguraContent>
         </ContentQuemSomos>
         <ContentQuemSomos>

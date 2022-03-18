@@ -9,6 +9,15 @@ const ContainerMostraProdutosCarrinho = styled.div`
   background: #fff;
   padding: 1rem;
   border-radius: 2px;
+
+  @media (max-width: 800px) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
 
 export default ContainerMostraProdutosCarrinho;

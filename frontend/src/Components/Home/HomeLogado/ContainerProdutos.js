@@ -93,11 +93,6 @@ const ContainerProduto = ({ produtoSelecionado }) => {
                 );
               }}
             >
-              <AnimacaoAdicionaAoCarrinho>
-                <LoadingAdicionarAoCarrinho>
-                  Produto adicionado
-                </LoadingAdicionarAoCarrinho>
-              </AnimacaoAdicionaAoCarrinho>
               <SpanAdicionarAoCarrinho>
                 Adicionar ao carrinho
               </SpanAdicionarAoCarrinho>

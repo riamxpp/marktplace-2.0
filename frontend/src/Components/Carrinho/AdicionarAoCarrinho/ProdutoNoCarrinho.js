@@ -8,6 +8,11 @@ const ProdutoNoCarrinho = styled.article`
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
+  @media (max-width: 500px) {
+    height: auto;
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 
 export default ProdutoNoCarrinho;

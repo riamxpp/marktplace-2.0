@@ -10,6 +10,12 @@ const ContainerOperacoesCarrinho = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media (max-width: 800px) {
+    grid-column: 1;
+    grid-row: 2;
+    width: 15rem;
+    justify-content: space-evenly;
+  }
 `;
 
 export default ContainerOperacoesCarrinho;

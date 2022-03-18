@@ -10,6 +10,9 @@ const QuemSomos = styled.section`
     grid-template-columns: 1fr 1fr;
     gap: 1rem 0;
   }
+  @media (max-width: 530px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export default QuemSomos;

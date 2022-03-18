@@ -9,6 +9,11 @@ const ContainerEscolheProduto = styled.section`
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 2rem;
+  @media (max-width: 800px) {
+    width: 80%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 1fr;
+  }
 `;
 
 export default ContainerEscolheProduto;

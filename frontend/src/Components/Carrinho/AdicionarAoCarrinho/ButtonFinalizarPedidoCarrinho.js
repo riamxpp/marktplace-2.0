@@ -10,6 +10,9 @@ const ButtonFinalizarPedidoCarrinho = styled.button`
   border-radius: 4px;
   border: 2px solid #3337de;
   cursor: pointer;
+  @media (max-width: 1000px) {
+    margin: 0.4rem auto;
+  }
 `;
 
 export default ButtonFinalizarPedidoCarrinho;
