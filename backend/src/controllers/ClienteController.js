@@ -16,7 +16,7 @@ const loginCliente = async (req, res) => {
         email: usuarioDados.email,
         cidade: usuarioDados.cidade,
       },
-      '43543jsdwef',
+      "43543jsdwef",
       {
         expiresIn: 3600,
       }
