@@ -10,6 +10,8 @@ export const UsuarioStorage = ({ children }) => {
   const [error, setError] = useState(null);
   const [carrinhoUser, setCarrinhoUser] = useState(null);
   const [totalCarrinho, setTotalCarrinho] = useState(null);
+  const [precoProduto, setPrecoProduto] = useState(0);
+  const [estoqueProduto, setEstoqueProduto] = useState(null);
 
   async function LoginUsuario(email, senha) {
     try {
@@ -132,6 +134,20 @@ export const UsuarioStorage = ({ children }) => {
     }
   }
 
+  async function pegaPrecoProduto(idProduto) {
+    const preco = await api.post("/pega-preco-produto", {
+      idProduto,
+    });
+    setPrecoProduto(preco.data);
+  }
+
+  async function pegaEstoqueProduto(idProduto) {
+    const estoque = await api.post("/pega-estoque-produto", {
+      idProduto,
+    });
+    setEstoqueProduto(estoque.data);
+  }
+
   return (
     <UsuarioContext.Provider
       value={{
@@ -149,6 +165,10 @@ export const UsuarioStorage = ({ children }) => {
         pegaProdutosCarrinho,
         pegaTotalCarrinho,
         removeItemCarrinho,
+        pegaPrecoProduto,
+        precoProduto,
+        pegaEstoqueProduto,
+        estoqueProduto,
       }}
     >
       {children}

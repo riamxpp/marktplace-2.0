@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 import Header from "../Header/Header";
-import TituloH1 from '../Reutilizavel/TituloH1'
+import TituloH1 from "../Reutilizavel/TituloH1";
 import CadastroProduto from "./CadastroProduto";
 import Footer from "../Footer/Footer";
 import FormProduto from "./FormProduto";
@@ -32,8 +32,6 @@ const CadastrarProduto = () => {
       navigate("/login");
     }
   }, [dataLojaLogada, navigate]);
-
-
 
   function enviaDadosProduto(event) {
     event.preventDefault();
@@ -139,7 +137,7 @@ const CadastrarProduto = () => {
                 placeholder="Tamanho do produto"
                 name="tamanho"
                 id="tamanho"
-                width='40%'
+                width="40%"
               />
             </SeguraInput>
             <SeguraInput>

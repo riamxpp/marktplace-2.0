@@ -1,7 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
 import { UsuarioStorage } from "./Contexts/UsuarioContext/UsuarioContext";
+import { LojaStorage } from "./Contexts/LojaContext/LojaContext";
+
+import "./Global.css";
 import Home from "./Components/Home/Home";
 import Cadastro from "./Components/Cadastro/Cadastro";
 import Login from "./Components/Login/Login";
@@ -9,14 +11,12 @@ import TodosClientes from "./Components/Clientes/TodosClientes";
 import Sobre from "./Components/Sobre/Sobre";
 import Lojas from "./Components/LojasCadastradas/Lojas";
 import CadastrarProduto from "./Components/CadastrarProduto/CadastrarProduto";
-import "./Global.css";
 import Perfil from "./Components/Perfil/Perfil";
-import { LojaStorage } from "./Contexts/LojaContext/LojaContext";
 import AdicionarAoCarrinho from "./Components/Carrinho/AdicionarAoCarrinho/AdicionarAoCarrinho";
 import RemoverProduto from "./Components/RemoverProduto/RemoverProduto";
 import SeusProdutos from "./Components/SeusProdutos/Loja/SeusProdutos";
 import FeedBack from "./Components/FeedBack/FeedBack";
-import HomeLogado from "./Components/Home/HomeLogado/HomeLogado";
+import ProdutoIndividual from "./Components/ProdutoIndividual/ProdutoIndividual";
 
 function App() {
   return (
@@ -40,6 +40,7 @@ function App() {
           <Route path="/:user/remover-produto" element={<RemoverProduto />} />
           <Route path="/:user/seus-produtos" element={<SeusProdutos />} />
           <Route path="/feedback" element={<FeedBack />} />
+          <Route path="/:loja/:produto" element={<ProdutoIndividual />} />
         </Routes>
       </LojaStorage>
     </UsuarioStorage>

@@ -10,6 +10,7 @@ export const LojaStorage = ({ children }) => {
   const [errorLoja, setErrorLoja] = useState(false);
   const [dadosProduto, setDadosProduto] = useState(null);
   const [produtosCadastrados, setProdutosCadastrados] = useState(null);
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
   async function pegaDadosLoja() {
     try {
@@ -27,14 +28,11 @@ export const LojaStorage = ({ children }) => {
 
   async function loginLoja(email, senha) {
     try {
-      const dados = await api.post("/login-loja", 
-      { email, senha }
-      );
+      const dados = await api.post("/login-loja", { email, senha });
       setDataLojaLogada(dados.data);
-    }catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-    
   }
 
   async function cadastroProduto(
@@ -48,17 +46,21 @@ export const LojaStorage = ({ children }) => {
   ) {
     if (dataLojaLogada) {
       try {
-        await api.post("/cadastrar-produto", {
-          idLoja: dataLojaLogada.idLoja,
-          nome: nome,
-          preco: preco,
-          categoria: categoria,
-          marca: marca,
-          informacoesProduto: informacoesProduto,
-          tamanho: tamanho,
-          estoque,
-        }, 
-        { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}});
+        await api.post(
+          "/cadastrar-produto",
+          {
+            idLoja: dataLojaLogada.idLoja,
+            nomeLoja: dataLojaLogada.nome,
+            nome: nome,
+            preco: preco,
+            categoria: categoria,
+            marca: marca,
+            informacoesProduto: informacoesProduto,
+            tamanho: tamanho,
+            estoque,
+          },
+          { headers: { Authorization: `Bearer ${dataLojaLogada.token}` } }
+        );
       } catch (err) {
         console.log(err);
       }
@@ -87,25 +89,27 @@ export const LojaStorage = ({ children }) => {
 
   async function removerProduto(idProduto, idLoja) {
     try {
-      await api.post("/remover-produto", 
-      { idLoja, idProduto },
-      { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}}
+      await api.post(
+        "/remover-produto",
+        { idLoja, idProduto },
+        { headers: { Authorization: `Bearer ${dataLojaLogada.token}` } }
       );
-      await pegaProdutosCadastrado(idLoja); 
-    }catch(err){
-      console.log(err)
+      await pegaProdutosCadastrado(idLoja);
+    } catch (err) {
+      console.log(err);
     }
   }
 
   async function pegaProdutosCadastrado(idLoja) {
     try {
-      const dados = await api.post("/pega-produtos-cadastrados", 
-      { idLoja }, 
-      { headers: { "Authorization": `Bearer ${dataLojaLogada.token}`}}
+      const dados = await api.post(
+        "/pega-produtos-cadastrados",
+        { idLoja },
+        { headers: { Authorization: `Bearer ${dataLojaLogada.token}` } }
       );
       setProdutosCadastrados(dados.data);
-    }catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -125,6 +129,8 @@ export const LojaStorage = ({ children }) => {
         produtosCadastrados,
         pegaProdutosCadastrado,
         removerProduto,
+        produtoSelecionado,
+        setProdutoSelecionado,
       }}
     >
       {children}
