@@ -1,12 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+
 import styled from "styled-components";
 import ButtonEnviar from "../../Cadastro/ButtonEnviar";
 import Input from "../../Form/Input";
 import SeguraInput from "../../Geral/SeguraInput";
 import Titulo from "../../Geral/Titulo";
 import ErrorMessage from "../ErrorMessage";
-import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
-import { useNavigate } from "react-router-dom";
 
 const LojaForm = styled.form`
   width: 90%;
@@ -30,10 +32,29 @@ const LojaLogin = ({
 }) => {
   const { loginLoja, dataLojaLogada } = useContext(LojaContext);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .required("O campo email é obrigatorio")
+      .email("Passe um email válido."),
+    senha: yup
+      .string()
+      .required("O campo senha é obrigatorio.")
+      .min(6, "A senha tem no mínimo 6 caracteres."),
+  });
 
   async function sendLojaData(event) {
     event.preventDefault();
-    loginLoja(email, senha);
+    schema
+      .validate({ email, senha }, { abortEarly: false })
+      .then(() => {
+        loginLoja(email, senha);
+      })
+      .catch((err) => {
+        setError(err.errors[0]);
+      });
   }
 
   useEffect(() => {
@@ -48,6 +69,7 @@ const LojaLogin = ({
         <Titulo>Loja</Titulo>
         {dataLojaLogada && <ErrorMessage>{dataLojaLogada.error}</ErrorMessage>}
         <SeguraInput>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
           <Input
             placeholder="Email"
             type="email"

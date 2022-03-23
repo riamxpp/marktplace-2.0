@@ -7,6 +7,7 @@ import HomeContent from "../HomeContent";
 import BackgroundBanner from "../../../assents/img/home/background.jpg";
 import Servicos from "./Servicos/Servicos";
 import DepoimentosComponent from "./Depoimentos/Depoimentos";
+import ComoTrabalhamosComponent from "./ComoTrabalhamos/ComoTrabalhamosComponent";
 
 const HomeDeslogado = () => {
   return (
@@ -15,11 +16,7 @@ const HomeDeslogado = () => {
         <Banner img={BackgroundBanner}>
           <Titutlo>Sua loja a um clique de distância</Titutlo>
         </Banner>
-        <ComoTrabalhamos>
-          <Trabalho></Trabalho>
-          <Trabalho></Trabalho>
-          <Trabalho></Trabalho>
-        </ComoTrabalhamos>
+        <ComoTrabalhamosComponent />
       </HomeContent>
       <Servicos></Servicos>
       <DepoimentosComponent />

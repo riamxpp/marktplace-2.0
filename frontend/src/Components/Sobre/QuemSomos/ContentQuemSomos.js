@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const ContentQuemSomos = styled.article`
   width: 13rem;
+  height: auto;
   display: flex;
   flex-direction: column;
   padding: 1rem;

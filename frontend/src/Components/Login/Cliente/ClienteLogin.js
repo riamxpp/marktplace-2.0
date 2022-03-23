@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import * as yup from "yup";
 
 import { useNavigate } from "react-router-dom";
 import ButtonEnviar from "../../Cadastro/ButtonEnviar";
@@ -29,12 +30,32 @@ const ClienteLogin = ({
   senha,
   setSenha,
 }) => {
+  const [errorInput, setErrorInput] = useState("");
   const { LoginUsuario, data } = useContext(UsuarioContext);
   const navigate = useNavigate();
 
+  let schema = yup.object().shape({
+    email: yup
+      .string()
+      .required("O campo email é obrigatorio.")
+      .email("Preencha um email válido."),
+    senha: yup
+      .string()
+      .required("O campo senha é obrigatorio.")
+      .min(6, "A senha tem no minimo 6 caracteres."),
+  });
+
   async function sendClientDate(event) {
     event.preventDefault();
-    LoginUsuario(email, senha);
+    const valores = { email, senha };
+    schema
+      .validate(valores, { abortEarly: false })
+      .then(() => {
+        LoginUsuario(email, senha);
+      })
+      .catch((err) => {
+        setErrorInput(err.errors[0]);
+      });
   }
 
   useEffect(() => {
@@ -54,6 +75,7 @@ const ClienteLogin = ({
         {data && <ErrorMessage>{data.error}</ErrorMessage>}
 
         <SeguraInput>
+          {errorInput && <ErrorMessage>{errorInput}</ErrorMessage>}
           <Input
             placeholder="Email"
             type="email"

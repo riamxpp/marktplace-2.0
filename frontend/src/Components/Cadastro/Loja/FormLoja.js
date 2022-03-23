@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import api from "../../api/api";
+import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
+import * as yup from "yup";
 
 import Input from "../../Form/Input";
 import SeguraInput from "../../Geral/SeguraInput";
 import Titulo from "../../Geral/Titulo";
 import ButtonEnviar from "../ButtonEnviar";
+import ErrorMessage from "../../Login/ErrorMessage";
 
 const FormL = styled.form`
   width: 90%;
@@ -30,21 +32,52 @@ const FormLoja = ({ value }) => {
   const [rua, setRua] = useState("");
   const [bairro, setBairro] = useState("");
   const [numero, setNumero] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const { cadastrarLoja } = useContext(LojaContext);
+
+  const schema = yup.object().shape({
+    nome: yup.string().required("O campo nome é obrigatorio."),
+    email: yup
+      .string()
+      .required("O campo email é obrigatorio.")
+      .email("Passe um email válido."),
+    senha: yup
+      .string()
+      .required("O campo senha é obrigatorio.")
+      .min(6, "A senha deve ter no mínimo 6 caracteres."),
+    cnpj: yup
+      .string()
+      .required("O campo CNPJ é obrigatorio.")
+      .matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/, "Passe um CNPJ válido."),
+    cidade: yup.string().required("O campo cidade é obrigatorio."),
+    rua: yup.string().required("O campo rua é obrigatorio."),
+    bairro: yup.string().required("O campo bairro é obrigatorio."),
+    numero: yup
+      .number("O número precisa ser um número")
+      .required("O campo numero é obrigatorio."),
+  });
 
   async function sendDate(event) {
     event.preventDefault();
-    const dados = { nome, email, senha, cnpj, cidade, rua, bairro, numero };
-    const dateLoja = await api
-      .post("/cadastrar-loja", dados)
-      .then((response) => response)
-      .catch((error) => error);
-    setData(dateLoja);
+    const valores = { nome, email, senha, cnpj, cidade, rua, bairro, numero };
+    schema
+      .validate(valores, { abortEarly: false })
+      .then((valid) => {
+        cadastrarLoja(nome, email, senha, cnpj, cidade, rua, bairro, numero);
+        setData(true);
+      })
+      .catch((err) => {
+        setError(err.errors[0]);
+        console.log(err.errors);
+      });
   }
 
   useEffect(() => {
     if (data) {
       navigate("/login");
+      setData(false);
     }
   }, [data, navigate]);
 
@@ -52,6 +85,7 @@ const FormLoja = ({ value }) => {
     <FormL onSubmit={sendDate} value={value}>
       <Titulo>Loja</Titulo>
       <SeguraInput width="100%">
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <Input
           width="80%"
           placeholder="Nome da Loja"
@@ -117,9 +151,9 @@ const FormLoja = ({ value }) => {
           onChange={({ target }) => setRua(target.value)}
         />
       </SeguraInput>
-      <SeguraInput width="100%">
+      <SeguraInput direction="row" width="100%">
         <Input
-          width="50%"
+          width="55%"
           placeholder="Bairro"
           name="bairroLoja"
           id="bairroLoja"
@@ -127,7 +161,8 @@ const FormLoja = ({ value }) => {
           onChange={({ target }) => setBairro(target.value)}
         />
         <Input
-          width="25%"
+          type="tel"
+          width="20%"
           placeholder="Número"
           name="numero"
           id="numero"

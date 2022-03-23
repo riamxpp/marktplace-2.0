@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ContentCadastro = styled.section`
   width: 90%;
-  height: 80vh;
+  height: auto;
   padding: 1.3rem;
   margin: 0;
   display: flex;

@@ -12,6 +12,28 @@ export const LojaStorage = ({ children }) => {
   const [produtosCadastrados, setProdutosCadastrados] = useState(null);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
+  async function cadastrarLoja(
+    nome,
+    email,
+    senha,
+    cnpj,
+    cidade,
+    rua,
+    bairro,
+    número
+  ) {
+    await api.post("/cadastrar-loja", {
+      nome,
+      email,
+      senha,
+      cnpj,
+      cidade,
+      rua,
+      bairro,
+      número,
+    });
+  }
+
   async function pegaDadosLoja() {
     try {
       setLoadingLoja(true);
@@ -120,6 +142,7 @@ export const LojaStorage = ({ children }) => {
         dataAllLojas,
         loadingLoja,
         errorLoja,
+        cadastrarLoja,
         pegaDadosLoja,
         loginLoja,
         verificaStatusLoginLoja,

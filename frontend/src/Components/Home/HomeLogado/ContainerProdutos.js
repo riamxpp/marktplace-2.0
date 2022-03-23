@@ -12,8 +12,6 @@ import TituloProduto from "./TituloProduto";
 import { Link, useNavigate } from "react-router-dom";
 import "./Link.css";
 import { UsuarioContext } from "../../../Contexts/UsuarioContext/UsuarioContext";
-import AnimacaoAdicionaAoCarrinho from "./AnimacaoAdicionaAoCarrinho";
-import LoadingAdicionarAoCarrinho from "./LoadingAdicionarAoCarrinho";
 import BackgroundLoading from "../../../hooks/BackgroundLoading";
 import Loading from "../../../hooks/Loading";
 import PaginationComponent from "../../../hooks/PaginationComponent";

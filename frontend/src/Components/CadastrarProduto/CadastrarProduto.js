@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import * as yup from "yup";
 
 import Header from "../Header/Header";
 import TituloH1 from "../Reutilizavel/TituloH1";
@@ -14,18 +15,32 @@ import ButtonEnviar from "../Cadastro/ButtonEnviar";
 import { LojaContext } from "../../Contexts/LojaContext/LojaContext";
 import DescricaoProduto from "./DescriacaoProduto";
 import { useNavigate } from "react-router-dom";
+import ErrorMessage from "../Login/ErrorMessage";
 
 const CadastrarProduto = () => {
-  const [nomeProduto, setNomeProduto] = useState("");
+  const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
   const [categoria, setCategoria] = useState("");
   const [marca, setMarca] = useState("");
-  const [tamanhoProduto, setTamanhoProduto] = useState("");
-  const [informacoesProduto, setInformacoesProduto] = useState("");
+  const [tamanho, setTamanho] = useState("");
+  const [informacoes, setInformacoes] = useState("");
   const [estoque, setEstoque] = useState(0);
+  const [error, setError] = useState("");
   const { dataLojaLogada, cadastroProduto } = useContext(LojaContext);
   const navigate = useNavigate();
   const primeiroInputRef = useRef(null);
+
+  const schema = yup.object().shape({
+    nome: yup.string().required("O campo nome é obrigatorio."),
+    preco: yup
+      .number("O campo preço precisa ser númerico.")
+      .required("O campo preco é preco."),
+    categoria: yup.string().required("O campo categoria é obrigatorio."),
+    marca: yup.string().required("O campo marca é obrigatorio."),
+    tamanho: yup.string().required("O campo tamanho é obrigatorio."),
+    informacoes: yup.string().required("O campo informacoes é obrigatorio."),
+    estoque: yup.string().required("O campo estoque é obrigatorio."),
+  });
 
   useEffect(() => {
     if (!dataLojaLogada) {
@@ -35,45 +50,65 @@ const CadastrarProduto = () => {
 
   function enviaDadosProduto(event) {
     event.preventDefault();
-    cadastroProduto(
-      nomeProduto,
+    const valores = {
+      nome,
       preco,
       categoria,
       marca,
-      tamanhoProduto,
-      informacoesProduto,
-      estoque
-    );
-    setNomeProduto("");
-    setPreco("");
-    setMarca("");
-    setCategoria("");
-    setTamanhoProduto("");
-    setInformacoesProduto("");
-    setEstoque("");
-    primeiroInputRef.current.focus();
+      tamanho,
+      informacoes,
+      estoque,
+    };
+    schema
+      .validate(valores, { abortEarly: false })
+      .then(() => {
+        cadastroProduto(
+          nome,
+          preco,
+          categoria,
+          marca,
+          tamanho,
+          informacoes,
+          estoque
+        );
+        setError("");
+        setNome("");
+        setPreco("");
+        setMarca("");
+        setCategoria("");
+        setTamanho("");
+        setInformacoes("");
+        setEstoque("");
+        primeiroInputRef.current.focus();
+      })
+      .catch((err) => {
+        setError(err.errors[0]);
+      });
   }
 
   return (
     <>
       <Header />
       <CadastroProduto>
-        <TituloH1 size="2rem">Cadastrar Produto</TituloH1>
+        <TituloH1 size="2rem" color="#fff">
+          Cadastrar Produto
+        </TituloH1>
         <FormProduto onSubmit={enviaDadosProduto}>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
           <AreaInputsInfo>
             <SeguraInput>
               <Input
                 ref={primeiroInputRef}
-                value={nomeProduto}
-                onChange={({ target }) => setNomeProduto(target.value)}
+                value={nome}
+                onChange={({ target }) => setNome(target.value)}
                 type="text"
                 placeholder="Nome do produto"
                 name="nome"
                 id="nome"
-                width="40%"
+                width="60%"
               />
             </SeguraInput>
-            <SeguraInput gap={"1rem"}>
+            <SeguraInput direction="row" gap={"1rem"}>
               {" "}
               <Input
                 value={preco}
@@ -82,7 +117,7 @@ const CadastrarProduto = () => {
                 placeholder="Preco"
                 name="preco"
                 id="preco"
-                width="9.6rem"
+                width="38%"
               />
               <SelectCadastrarProduto
                 title="Informe a categoria do seu produto"
@@ -107,10 +142,10 @@ const CadastrarProduto = () => {
                 </OptionCadastrarProduto>
               </SelectCadastrarProduto>
             </SeguraInput>
-            <SeguraInput>
+            <SeguraInput direction="row">
               <Input
                 value={marca}
-                width="11rem"
+                width="38%"
                 onChange={({ target }) => setMarca(target.value)}
                 type="text"
                 placeholder="Marca"
@@ -118,7 +153,7 @@ const CadastrarProduto = () => {
                 id="marca"
               />
               <Input
-                width="4rem"
+                width="5.3rem"
                 title="Informe a quantidade de produto no estoque"
                 value={estoque}
                 onChange={({ target }) => setEstoque(target.value)}
@@ -130,22 +165,22 @@ const CadastrarProduto = () => {
             </SeguraInput>{" "}
             <SeguraInput>
               <Input
-                value={tamanhoProduto}
-                onChange={({ target }) => setTamanhoProduto(target.value)}
+                value={tamanho}
+                onChange={({ target }) => setTamanho(target.value)}
                 title="Informe o tamanho do seu produto"
                 type="text"
                 placeholder="Tamanho do produto"
                 name="tamanho"
                 id="tamanho"
-                width="40%"
+                width="60%"
               />
             </SeguraInput>
             <SeguraInput>
               <DescricaoProduto
-                value={informacoesProduto}
-                onChange={({ target }) => setInformacoesProduto(target.value)}
+                value={informacoes}
+                onChange={({ target }) => setInformacoes(target.value)}
                 placeholder="Descrição/Informações produto"
-                width="40%"
+                width="60%"
               />
             </SeguraInput>
             <SeguraInput>

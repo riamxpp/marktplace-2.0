@@ -13,6 +13,14 @@ export const UsuarioStorage = ({ children }) => {
   const [precoProduto, setPrecoProduto] = useState(0);
   const [estoqueProduto, setEstoqueProduto] = useState(null);
 
+  async function cadastrarUsuario(nome, email, senha, cpf, cidade) {
+    const dados = { nome, email, senha, cpf, cidade };
+    await api
+      .post("/cadastro-cliente", dados)
+      .then((res) => res)
+      .catch((err) => console.log(err));
+  }
+
   async function LoginUsuario(email, senha) {
     try {
       setLoading(true);
@@ -158,6 +166,7 @@ export const UsuarioStorage = ({ children }) => {
         carrinhoUser,
         setCarrinhoUser,
         totalCarrinho,
+        cadastrarUsuario,
         LoginUsuario,
         Logout,
         verificaStatusLogin,

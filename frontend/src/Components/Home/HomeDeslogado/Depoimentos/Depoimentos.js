@@ -12,6 +12,7 @@ import TituloDepoimentos from "./TituloDepoimentos";
 import WrapperDepoimentos from "./WrapperDepoimentos";
 import ContentFotoPessoa from "./ContentFotoPessoa";
 import FotoPessoa from "./FotoPessoa";
+import useDebounce from "../../../../hooks/useDebounce";
 
 const Depoimentos = styled.section`
   width: 100%;
@@ -34,13 +35,15 @@ const DepoimentosComponent = () => {
   const pessoaRef = useRef(null);
   const depoimentoRef = useRef(null);
 
+  const movimentaPessoa2Debounce = useDebounce(movimentaPessoa2, 500);
+
   useEffect(() => {
     let arrumaSlide = setInterval(() => {
-      window.addEventListener("resize", movimentaPessoa2);
+      window.addEventListener("resize", movimentaPessoa2Debounce);
     }, 500);
     return () => {
       clearInterval(arrumaSlide);
-      window.addEventListener("resize", movimentaPessoa2);
+      window.addEventListener("resize", movimentaPessoa2Debounce);
     };
   }, []);
 
