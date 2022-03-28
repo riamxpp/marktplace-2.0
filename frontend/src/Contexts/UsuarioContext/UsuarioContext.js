@@ -109,19 +109,16 @@ export const UsuarioStorage = ({ children }) => {
   }
 
   async function pegaTotalCarrinho(_id) {
-    try {
-      const dados = await api.post(
+    await api
+      .post(
         "/total-carrinho",
         { _id },
         {
           headers: { Authorization: `Bearer ${data.dadosUsuario.token}` },
         }
-      );
-      setTotalCarrinho(dados.data);
-      return totalCarrinho;
-    } catch (err) {
-      console.log(err);
-    }
+      )
+      .then((result) => setTotalCarrinho(result.data))
+      .catch((err) => console.log(err));
   }
 
   async function removeItemCarrinho(carrinho, _id) {

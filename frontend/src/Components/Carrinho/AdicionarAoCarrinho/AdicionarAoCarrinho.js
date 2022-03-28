@@ -19,7 +19,6 @@ import ExcluirProdutoCarrinho from "./ExcluirProdutoCarrinho";
 import Footer from "../../Footer/Footer";
 
 const AdicionarAoCarrinho = () => {
-  const [animaCarrinho, setAnimaCarrinho] = useState(false);
   const {
     pegaProdutosCarrinho,
     data,
@@ -38,7 +37,7 @@ const AdicionarAoCarrinho = () => {
     } else {
       navigate("/login");
     }
-  }, [data, navigate]);
+  }, [data, navigate, carrinhoUser]);
 
   function removeProduto(produto) {
     const copiaCarrinhoUser = carrinhoUser.filter(
@@ -78,7 +77,7 @@ const AdicionarAoCarrinho = () => {
           ))}
         </ContainerMostraProdutosCarrinho>
 
-        <ContainerOperacoesCarrinho onClick={() => setAnimaCarrinho(true)}>
+        <ContainerOperacoesCarrinho>
           <SubTotalCarrinho>
             Subtotal ( {carrinhoUser?.length}{" "}
             {carrinhoUser?.length > 1 ? "items" : "item"} ): R$ {totalCarrinho}
