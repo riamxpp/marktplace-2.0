@@ -86,8 +86,9 @@ const Header = () => {
               <Link
                 id="linkMobileButton"
                 className="link"
-                onClick={data ? Logout : () => ""}
-                to={navPerfilLogin.urlCadastro}
+                onClick={data || dataLojaLogada ? Logout : () => ""}
+                to={data || dataLojaLogada ? "/" : "/cadastre-se"}
+                // to={navPerfilLogin.urlCadastro}
               >
                 {data || dataLojaLogada ? "Sair" : "Cadastre-se"}
               </Link>

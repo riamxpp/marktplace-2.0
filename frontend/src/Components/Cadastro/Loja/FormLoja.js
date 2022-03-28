@@ -70,7 +70,6 @@ const FormLoja = ({ value }) => {
       })
       .catch((err) => {
         setError(err.errors[0]);
-        console.log(err.errors);
       });
   }
 

@@ -24,6 +24,9 @@ const ContainerEscolheProduto = ({ setProdutoSelecionado }) => {
           <LiProdutos onClick={pegaProdutoSelecionado}>Roupas</LiProdutos>
           <LiProdutos onClick={pegaProdutoSelecionado}>Domesticos</LiProdutos>
           <LiProdutos onClick={pegaProdutoSelecionado}>Livros</LiProdutos>
+          <LiProdutos onClick={pegaProdutoSelecionado}>Saúde</LiProdutos>
+          <LiProdutos onClick={pegaProdutoSelecionado}>Movéis</LiProdutos>
+          <LiProdutos onClick={pegaProdutoSelecionado}>Beleza</LiProdutos>
         </ul>
       </nav>
     </DivEscolheProduto>

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import "./Link.css";
 import { LojaContext } from "../../../Contexts/LojaContext/LojaContext";
 import Produto from "../Produto";
 import AdicionarAoCarrinhoHome from "./AdicionarAoCarrinhoHome";
@@ -10,7 +11,6 @@ import PrecoRoupa from "./PrecoRoupa";
 import SpanAdicionarAoCarrinho from "./SpanAdicionarAoCarrinho";
 import TituloProduto from "./TituloProduto";
 import { Link, useNavigate } from "react-router-dom";
-import "./Link.css";
 import { UsuarioContext } from "../../../Contexts/UsuarioContext/UsuarioContext";
 import BackgroundLoading from "../../../hooks/BackgroundLoading";
 import Loading from "../../../hooks/Loading";
@@ -18,6 +18,8 @@ import PaginationComponent from "../../../hooks/PaginationComponent";
 import SeguraProduto from "./SeguraProduto";
 import SeguraPaginacao from "./SeguraPaginacao";
 import ContainerInformacoesProduto from "./ContainerInformacoesProduto";
+import ProdutosComponente from "./ProdutosComponente/ProdutosComponente";
+import SemProdutosCadastrados from "./SemProdutosCadastrados/SemProdutosCadastrados";
 
 const DivProduto = styled.div`
   width: 52rem;
@@ -62,64 +64,19 @@ const ContainerProduto = ({ produtoSelecionado }) => {
 
   return (
     <DivProduto>
-      <SeguraProduto>
-        {ITENS_ATUAIS.map((item) => (
-          <ContainerInformacoesProduto key={item._id}>
-            <Produto>
-              <Link
-                onClick={() => {
-                  setProdutoSelecionado(item);
-                }}
-                className="linkProduto"
-                to={`/${item.nomeLoja}/${item.nome}`}
-              >
-                <div>
-                  {" "}
-                  <TituloProduto>
-                    {item.nome} {item.marca}
-                  </TituloProduto>
-                  <InformacoesProduto>
-                    {item.informacoesProduto}
-                  </InformacoesProduto>
-                  <InformacoesProduto>{item.tamanho}</InformacoesProduto>
-                </div>
-                <ContentPrecoEComprar>
-                  <PrecoRoupa>{item.preco} R$</PrecoRoupa>
-                  <Link to="/comprar" className="comprar">
-                    Comprar
-                  </Link>
-                </ContentPrecoEComprar>
-              </Link>
-              <AdicionarAoCarrinhoHome
-                onClick={() => {
-                  adicionarAoCarrinho(
-                    data.dadosUsuario.idUser,
-                    item._id,
-                    item.nome,
-                    item.categoria,
-                    item.preco,
-                    item.marca,
-                    item.informacoesProduto,
-                    item.estoque
-                  );
-                }}
-              >
-                <SpanAdicionarAoCarrinho>
-                  Adicionar ao carrinho
-                </SpanAdicionarAoCarrinho>
-                <Carrinho />
-              </AdicionarAoCarrinhoHome>
-            </Produto>
-          </ContainerInformacoesProduto>
-        ))}
-      </SeguraProduto>
-      <SeguraPaginacao>
-        <PaginationComponent
-          pages={PAGES}
+      {ITENS_ATUAIS.length > 0 ? (
+        <ProdutosComponente
+          data={data}
+          ITENS_ATUAIS={ITENS_ATUAIS}
+          setProdutoSelecionado={setProdutoSelecionado}
+          adicionarAoCarrinho={adicionarAoCarrinho}
+          PAGES={PAGES}
           pageAtual={pageAtual}
           setPageAtual={setPageAtual}
         />
-      </SeguraPaginacao>
+      ) : (
+        <SemProdutosCadastrados />
+      )}
     </DivProduto>
   );
 };

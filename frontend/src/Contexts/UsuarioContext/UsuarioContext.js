@@ -45,7 +45,6 @@ export const UsuarioStorage = ({ children }) => {
   }
 
   function Logout() {
-    api.post("/logout-cliente");
     setLogin(null);
     setData(null);
   }

@@ -20,7 +20,7 @@ export const LojaStorage = ({ children }) => {
     cidade,
     rua,
     bairro,
-    número
+    numero
   ) {
     await api.post("/cadastrar-loja", {
       nome,
@@ -30,7 +30,7 @@ export const LojaStorage = ({ children }) => {
       cidade,
       rua,
       bairro,
-      número,
+      numero,
     });
   }
 
