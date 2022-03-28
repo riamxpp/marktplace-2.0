@@ -10,18 +10,20 @@ const loginLoja = async (req, res) => {
   });
 
   if (data) {
-    const token = sign({
-      idLoja: data._id,
-      email: data.email,
-      nome: data.nome,
-      cidade: data.cidade,
-      quantidadeProdutos: data.quantidadeProdutos,
-      produtos: data.produtos,
-    }, 
-    '43543jsdwef',
-    {
-      expiresIn: 3600,
-    });
+    const token = sign(
+      {
+        idLoja: data._id,
+        email: data.email,
+        nome: data.nome,
+        cidade: data.cidade,
+        quantidadeProdutos: data.quantidadeProdutos,
+        produtos: data.produtos,
+      },
+      "43543jsdwef",
+      {
+        expiresIn: 3600,
+      }
+    );
 
     req.session.lojaLogado = true;
     let dadosLoja = {
@@ -31,7 +33,7 @@ const loginLoja = async (req, res) => {
       cidade: data.cidade,
       quantidadeProdutos: data.quantidadeProdutos,
       produtos: data.produtos,
-      token
+      token,
     };
     req.session.dadosLoja = dadosLoja;
 
@@ -78,8 +80,8 @@ const createLoja = async (req, res) => {
     rua,
     numero,
     bairro,
-    produtos: [],
     cnpj,
+    produtos: [],
     quantidadeProdutos: 0,
   });
 

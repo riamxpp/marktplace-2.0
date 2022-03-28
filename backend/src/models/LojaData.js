@@ -9,7 +9,7 @@ const LojaDataSchema = new mongoose.Schema({
   senha: String,
   cidade: String,
   rua: String,
-  numero: String,
+  numero: Number,
   bairro: String,
   cnpj: String,
   produtos: Array,
