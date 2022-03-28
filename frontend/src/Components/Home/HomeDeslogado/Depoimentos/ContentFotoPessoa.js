@@ -7,6 +7,7 @@ const ContentFotoPessoa = styled.article`
   align-items: center;
   justify-content: space-evenly;
   background-size: cover;
+  cursor: pointer;
 `;
 
 export default ContentFotoPessoa;

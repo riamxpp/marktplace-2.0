@@ -21,7 +21,7 @@ const PerguntaResposta = ({ pergunta, resposta }) => {
 
   return (
     <>
-      <ContentPerguntasFrequentes >
+      <ContentPerguntasFrequentes>
         <Pergunta onClick={mostraResposta}>
           <Texto>{pergunta}</Texto>
           <Button>{activeResponse ? "-" : "+"}</Button>
